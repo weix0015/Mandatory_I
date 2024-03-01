@@ -1,7 +1,3 @@
-#homepage_logo {
-  width: 5em;
-}
-
 body {
   min-height: 95vh;
   display: flex;
@@ -11,6 +7,28 @@ body {
 main {
   flex: 1;
 }
+
+#homepage_logo {
+  width: 5em;
+  padding: 1em;
+  border-radius: 15px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+#clock_date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#clock, #date {
+  margin-bottom: -3rem;
+  margin-top: -4rem;
+  font-size: 2em;
+  color: #ffffff;
+}
+
 
 #top_header {
   text-align: center;

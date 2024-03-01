@@ -10,6 +10,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve("public/pages/homepage/homepage.html"));
 });
 
+// all endpoints to 02-02/2024
 app.get("/gitTerminals", (req, res) => {
   res.sendFile(path.resolve("public/pages/git_terminal/git_terminal.html"));
 });
@@ -29,6 +30,12 @@ app.get("/typeCoercions", (req, res) => {
 app.get("/restApiDesigns", (req, res) => {
   res.sendFile(path.resolve("public/pages/rest_api_design/rest_api_design.html"));
 });
+
+// all endpoints to 09-02/2024
+app.get("/javascriptScoping", (req, res) => {
+  res.sendFile(path.resolve("public/pages/javascript_scoping/javascript_scoping.html"));
+});
+
 
 const PORT = 8080;
 app.listen(PORT, () => console.log("Server is running on port ", PORT));
