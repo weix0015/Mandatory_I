@@ -10,19 +10,23 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve("public/pages/homepage/homepage.html"));
 });
 
-app.get("/git_terminal", (req, res) => {
+app.get("/gitTerminals", (req, res) => {
   res.sendFile(path.resolve("public/pages/git_terminal/git_terminal.html"));
 });
 
-app.get("/javascript_datatypes", (req, res) => {
+app.get("/javascriptDatatypes", (req, res) => {
   res.sendFile(path.resolve("public/pages/javascript_datatypes/javascript_datatypes.html"));
 });
 
-app.get("/node.js", (req, res) => {
+app.get("/nodejs", (req, res) => {
   res.sendFile(path.resolve("public/pages/node.js/node.js.html"));
 });
 
-app.get("/type_coercion", (req, res) => {
+app.get("/typeCoercions", (req, res) => {
+  res.sendFile(path.resolve("public/pages/type_coercion/type_coercion.html"));
+});
+
+app.get("/restApiDesigns", (req, res) => {
   res.sendFile(path.resolve("public/pages/type_coercion/type_coercion.html"));
 });
 
