@@ -1,0 +1,9 @@
+#learning_goals_table {
+  display: grid;
+  border-collapse: collapse;
+}
+
+#learning_goals_table th, #learning_goals_table td {
+  border: 2px solid black;
+  padding: 8px;
+}

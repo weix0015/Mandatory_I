@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/water.css">
+  <link rel="stylesheet" href="/assets/css/default.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
   <title>Type Coercion</title>
 </head>
@@ -13,10 +14,38 @@
       <a href="/"><img id="homepage_logo" src="/assets/images/homepage_logo.png"></a>
     </nav>
     <main>
-      <h1>Læringsmål</h1>
+      <h1 id="top_header">Type Coercion</h1>
+      <p>Type Coercion det er, når der automatisk bliver ændret på datatyper i javascript. 
+        Det er når forskellige typer værdier der bliver brugt sammen i en operation.
+      Det kan medføre til unormal opførsel, hvis det ikke bliver håndteret korrekt, 
+      så det er vigtig at håndterer den ordentligt. For unormal opførsel, så brug
+    <code>===</code> og <code>!==</code>, som er den måde du sammenligner værdier fra dataen,
+      hvor du undgår at ændre deres datatype. Ellers hvis det er nødvendigt, så kan værdier også konverteres
+    mellem forskellige datatyper, ved hjælp af konverteringsfunktioner som der er indbygget i javascript, 
+    som man kan bruge.
+    <br>Her er nogle eksempler:<pre><code>let numString = "42";
+// num becomes 42 Number from a String
+let num = Number(numString);
+
+let num = 42;
+// str becomes "42" String from a Number
+let str = String(num)
+
+let num = 42;
+// bool becomes true boolean from a Number
+let bool = Boolean(num);
+
+let numString = 42;
+// num becomes 42 Integer (Number in js), but a Number without decimals
+let num = parseInt(numString);
+
+let floatString = "3.73";
+// floatNum becomes 3.72 as a float (Number in js), but with decimals
+let floatNum = parseFloat(floatString);</code></pre></p>
     </main>
   
     <footer></footer>
-  
+    <script src="/assets/js/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>

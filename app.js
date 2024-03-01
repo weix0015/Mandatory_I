@@ -27,7 +27,7 @@ app.get("/typeCoercions", (req, res) => {
 });
 
 app.get("/restApiDesigns", (req, res) => {
-  res.sendFile(path.resolve("public/pages/type_coercion/type_coercion.html"));
+  res.sendFile(path.resolve("public/pages/rest_api_design/rest_api_design.html"));
 });
 
 const PORT = 8080;
