@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/water.css">
+  <link rel="stylesheet" href="/assets/css/default.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
   <title>JavaScript Datatyper</title>
 </head>
@@ -14,11 +15,112 @@
     </nav>
     <main>
       <h1>JavaScript Datatyper</h1>
-      <p>JavaScript har forskellige datatyper: string, numbers, booleans, object, arrays, f
+      <p>JavaScript har forskellige datatyper: <code>String, Number, Boolean, Symbol, BigInt, 
+        Null, Undefined, Object, Arrays, Function</code>.
+        Der er 7 primitive datatyper i javascript, <code>String, Number, Boolean, 
+          Symbol, BigInt, Null, Undefined</code>
+        og 1 ikke primitive datatyper i javascript, som er <code>Object</code>, der er også <code>Array</code>,
+        som er en type <code>Object</code> og det samme gælder for <code>Function</code>, 
+        men hvis man bruger <code>typeof</code> og <code>console.log()</code> 
+        så får man <code>Function</code> i stedet for <code>Object</code>.
+        <h4>Variabler, String, Numbers og floats</h4>
+        Man opretter variabler med <code>const</code> eller <code>let</code>.
+        <code>const</code> det er konstant, men ikke i dens værdi, men i tildelingen,
+        som betyder, variablen kan ikke blive tildelt igen og at den skal være tildelt til at starte med.
+        Derimod med <code>let</code> kan variablen godt tildeles igen, og man skal undgå at bruge <code>var</code>
+        på grund af det kan skabe side effects og <code>var</code> har function scope, imodsætning til
+        <code>const</code> og <code>let</code>, som har blockscope, hvilket gør man kun har adgang inden i blokken.
+        Her er et eksempel:
+        <pre><code>{ 
+  let x = 10;
+  console.log(x); // Output: 10 
+}
+
+console.log(x); // ReferenceError: x is not defined</code></pre>
+      Her er et eksempel på side effect, hvor man aldrig skal bruge <code>var</code>
+      <pre><code>for (var i = 0; i < 5; i++) {
+  setTimeout(function() {
+    console.log(i); // Output 5 five times
+  }, 1000);
+}</code></pre>
+      Her er et eksempel på <code>const</code>, som ikke kan blive tildelt igen til en variable.
+      <pre><code>const x = 10;
+x = 20; // TypeError</code></pre>
+      Man kan sammensætte string ved hjælp af template literals fx.
+      <pre><code>const greeting = `Hi, my name is ${name} and i'm ${age} years old`</code></pre>
+      Det kaldes for backtick det her speciale karakter <code>``</code> 
+      og med backtick kan man også indsætte variable ved hjælp af bruge <code>${}</code> 
+      så kan der sættes variable inde i curly bracket som de her karakter hedder <code>{}</code>
+      Der findes også <code>""</code> og <code>''</code>, men man kan ikke bruge variable inden i, 
+      så skal man gøre det på den her måde i stedet for
+      <br><code>"hello" + name</code>
+      I JavaScript hvis man skal konverterer Strings til Numbers så kan man 
+      <code>parseInt()</code> og <code>parseFloat()</code>
+      <pre><code>// parseInt Eksempel
+const stringNumber = "10";
+const integerNumber = parseInt(stringNumber);
+console.log(integerNumber); // Output: 10
+        
+// parseFloat eksempel
+const decimalString = "3.14";
+const floatNumber = parseFloat(decimalString);
+console.log(floatNumber); // Output: 3.14
+      </code></pre>
+        Hvis man skal afrunde af numbers til et bestemt antal decimaler, så kan man gøre det ved hjælp af 
+        <code>toFixed()</code><br>Her et eksempel:
+        <pre><code>const num = 3.14159;
+const roundedNum = num.toFixed(2);
+console.log(roundedNum); // Output: "3.14"</code></pre>
+      <h4>Arrays og for loop</h4>
+      I JavaScript, får man adgang til elementer i et array ved hjælp af at bruge 
+      <code>push()</code>, <code>pop()</code>, <code>splice()</code>
+      og man bruger til at fx hvis man vil kopier et array, 
+      men der skal kun bruge for loop hvis vi skal tælle noget, 
+      eller så skal man bruge loop metoder i stedet for, så man undgår side effects.
+      Her er eksempler på <code>push()</code>, <code>pop()</code>, <code>splice()</code> og for loop
+      <pre><code>const array = [1, 2, 3];
+
+array.push(4); // adds 4 to the end of the array
+console.log(array); // Output: [1, 2, 3, 4]
+        
+const poppedElement = array.pop(); // remove the last element (4)
+console.log(poppedElement); // Output: 4
+console.log(array); // Output: [1, 2, 3]
+        
+const removedElement = array.splice(1, 1); // remove the element at index 1 (2)
+console.log(removedElement); // Output: [2]
+console.log(array); // Output: [1, 3]</code></pre>
+      <h4>Objects</h4>
+      Hvis vil have adgang til værdier i et objekt, så skal man gøre det ved hjælp af keys.
+      Man opretter et objekt med key-value-pair, og kan tilføje og fjerne egenskaber fra et objekt.
+      Her er nogle eksempler på at få adgang til et objekt, og oprette et objekt ved hjælp af key-value-pair
+      og tilføje og fjerne egenskaber fra et objekt.
+      <pre><code>// Eksempel på, at få adgang til values inde i et objekt ved hjælp af at bruge keys:
+const obj = { a: 1, b: 2, c: 3 };
+
+Object.keys(obj).forEach(key => {
+  console.log(obj[key]); // Output 1, 2, 3 (values for keys "a", "b", "c")
+});
+
+// Eksempel på, at oprette et objekt med key-value-pair
+const obj = { key1: "value1", key2: "value2" };
+console.log(obj);  // Output: { key1: "value1", key2: "value2" }
+
+// Eksempel på, at tilføje og fjerne egenskaber fra et objekt
+const obj = { a: 1 };
+
+// adding an attribute
+obj.b = 2;
+console.log(obj); // Output: { a: 1, b: 2 }
+
+// removing an attribute
+delete obj.a;
+console.log(obj);  // Output: { b: 2 }</code></pre>
       </p>
     </main>
-  
+
     <footer></footer>
-  
+  <script src="/assets/js/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 </body>
 </html>
