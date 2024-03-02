@@ -1,0 +1,16 @@
+#rest_api_design_table {
+  display: grid;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+#rest_api_design_table td, #rest_api_design_description {
+  border: 2px solid black;
+  padding: 8px;
+}
+
+#rest_api_design_description {
+  margin-top: 1rem;
+  max-width: 33rem;
+  max-height: 5rem;
+}

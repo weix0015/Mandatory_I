@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="/assets/css/water.css">
   <link rel="stylesheet" href="/assets/css/default.min.css">
   <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/pages/rest_api_design/rest_api_design.css">
   <title>REST API Design</title>
 </head>
 <body>
@@ -20,8 +21,79 @@
     </nav>
     <main>
       <h1 id="top_header">REST API Design</h1>
-      <p></p>
-      
+      <p>Design af et REST API det handler om definition af endpoints navngivning, rækkefølge af HTTP metoder,
+        altså hvilke HTTP metoder der skal være først, i midten og til sidst, og hvad de skal bruges til fx.
+        GET liste af alle books.
+        Her er beskrivelse og et eksempelt, på REST API Design på drinks:
+        <table id="rest_api_design_table">
+          <tr>
+            <th>HTTP methods</th>
+            <th>Endpoints</th>
+            <th>Usage</th>
+          </tr>
+
+          <tr>
+            <td>GET</td>
+            <td>/drinks</td>
+            <td>get all drinks</td>
+          </tr>
+
+          <tr>
+            <td>GET</td>
+            <td>/drinks/:id</td>
+            <td>get a drink by :id</td>
+          </tr>
+
+          <tr>
+            <td>POST</td>
+            <td>/drinks</td>
+            <td>create a new drink</td>
+          </tr>
+
+          <tr>
+            <td>PUT</td>
+            <td>/drinks/:id</td>
+            <td>update the entire drink resource</td>
+          </tr>
+
+          <tr>
+            <td>PATCH</td>
+            <td>/drinks/:id</td>
+            <td>update parts of the drink resource</td>
+          </tr>
+
+          <tr>
+            <td>DELETE</td>
+            <td>/drinks/:id</td>
+            <td>delete a drink resource by id</td>
+          </tr>
+          <div id="rest_api_design_description">
+            1. use the appropriate http method for the action
+            <br>
+            2. the ordering of the http methods
+            <br>
+            3. naming the endpoints so that they map to the collection in your system
+          </div>
+        </table>
+        Det er de regler man skal følge, når man laver et REST API Design, 
+        både at bruge de rigtige HTTP-metoder (GET, POST, PUT, PATCH, DELETE), 
+        til at create, read, update og delete data (CRUD). 
+        <br><br>
+        Rækkefølgen på http metoder er altid som du kan se ovenfor i tabellen, hvor endpoints er altid
+        navnetord / substantiv i fleretal fx. drinks.
+        Rækkefølgen organiseres altid på en logisk og konsistent måde for at gøre det lette 
+        at navigerer rundt og forståelse mæssige af hvor det er i koden og hvordan det er programmeret.
+        <br><br>
+        Det kan også være at det skal bruges sendes til udvikling
+        eller til at vedligeholde i længere perioder ude i fremtiden.
+        <br>
+        Navngivningskonventioner er altid i fleretal til de forskellige endpoints, 
+        som gøre det nemmere at forstå og bruge, i stedet for man skal huske hvor det er 
+        ental eller fleretal eller om det er et helt andet ord. På den måde kan man altid 
+        vide at det afspejler den underliggende datamodel fx. drinks og at endpoints ikke kan være
+        andre ord hvis det er drinks api.
+        <h4></h4>
+      </p>
     </main>
   
     <footer></footer>
