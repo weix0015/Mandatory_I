@@ -32,7 +32,11 @@ app.get("/restApiDesigns", (req, res) => {
 });
 
 // all endpoints to 09-02/2024
-app.get("/javascriptScoping", (req, res) => {
+app.get("/javascriptScopings", (req, res) => {
+  res.sendFile(path.resolve("public/pages/javascript_scoping/javascript_scoping.html"));
+});
+
+app.get("/javascriptFunctions", (req, res) => {
   res.sendFile(path.resolve("public/pages/javascript_scoping/javascript_scoping.html"));
 });
 
