@@ -1,4 +1,4 @@
-import { renderPage, readPage } from "./templatingEngine.js";
+import { renderPage, readPage } from "./templatingEngine.js"; 
 
 const home = readPage("./public/pages/homepage/homepage.html");
 export const homepagePage = renderPage(home, {
@@ -7,6 +7,7 @@ export const homepagePage = renderPage(home, {
   JavascriptScript: '<script src="/pages/homepage/homepage.js"></script>'
 });
 
+// all pages to 02-02/2024
 const gitTerminal = readPage("./public/pages/git_terminal/git_terminal.html");
 export const gitTerminalPage = renderPage(gitTerminal, {
   tabTitle: "Git & Terminal"
@@ -35,6 +36,7 @@ export const restApiDesignPage = renderPage(restApiDesign , {
   CSSLink: '<link rel="stylesheet" href="/pages/rest_api_design/rest_api_design.css">'
 });
 
+// all pages to 09-02/2024
 const javascriptScoping = readPage("./public/pages/javascript_scoping/javascript_scoping.html");
 export const javascriptScopingPage = renderPage(javascriptScoping, {
   tabTitle: "JavaScript Scoping"
@@ -54,4 +56,16 @@ export const packageJsonPage = renderPage(packageJson, {
 const express = readPage("./public/pages/express/express.html");
 export const expressPage = renderPage(express, {
   tabTitle: "Express"
+});
+
+const nodeModules = readPage("./public/pages/node_modules/node_modules.html");
+export const nodeModulesPage = renderPage(nodeModules, {
+  tabTitle: "Node Modules",
+  CSSLink: '<link rel="stylesheet" href="/pages/node_modules/node_modules.css">'
+});
+
+// all pages to 09-02/2024
+const nodemon = readPage("./public/pages/nodemon/nodemon.html");
+export const nodemonPage = renderPage(nodemon, {
+  tabTitle: "Nodemon"
 });

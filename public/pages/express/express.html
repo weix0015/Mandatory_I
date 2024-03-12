@@ -1,0 +1,42 @@
+<h1 id="top_header">Express</h1>
+<p>Express det er en Node.js dependency, der gør det nemmere at opbygge webapplikationer
+  og webtjenester i javascript. Det giver os mulighed for at bruge en række funktioner og metoder
+  til at oprette og administrere en webserver i vores Node.js-applikationer.
+  <br>Porten er default 8080 altså Tomcat ved default vil den lytte til port 8080, som man vil bruge, 
+  men det er når vi oprette en webserver ved hjælp af Express, så skal vi vælge en port, 
+  som er den vores server skal lytte på for at modtage indgående anmodninger fra klienter, f.eks.
+  webbrowsere.
+  <br>Tomcat default port 8080, er den almindeligt anvendte standardport til udvikling og testning af
+  webapplikationer.
+  <br><br>Get-request med Express, det er altså når en klient, f.eks. en webbrowser, sender en
+  GET-request til vores Express-webserver, så beder den om at få en bestemt ressource eller side.
+  Man kan definere en rute i vores Express-applikation, som helle tiden lytter efter GET-request
+  til en bestemt sti, som f.eks. <code>"/"</code>. Så når en klient sender en GET-request til 
+  denne sti, så vil Express-applikation udfører en handling eller sender en response tilbage til
+  klienten. I express vil man bruge <code>res.send()</code> til at sende en simpel tekstbesked 
+  eller anden form for response som svar på GET-request. Eksempel
+  <br><br>Express
+  <pre><code>const express = require("express");
+const app = express();</code></pre>
+I det her eksempel, så først importere vi Express-modulet ved at bruge <code>require("express")</code>,
+derefter initialisere vi en instans af Express-appen ved at kalde <code>express()</code>.
+Altså vi opretter en ny instans, som vi kan bruge til at opbygge vores server. Den instans gemmer i 
+variablen <code>app</code>, så vi kan bruge den til at opsætte vores server og definere vores ruter.
+Så vi først importere Express bagefter initialisere vi det så vi kan bruge det.
+<pre><code>app.listen(8080)</code></pre>
+Det er her vi vælger porten, altså det her fortæller Express-app at den skal lytte efter indgående
+forbindelse på den her port <code>(8080)</code>. Det betyder med andre ord, at vores server vil være
+tilgængelig på <pre><code>http://localhost:8080</code></pre>
+<pre><code>app.get("/", (req, res) => {
+  res.send("200 OK response for GET-request");
+});</code></pre>
+Det er her vi definere en rute til vores Express-app for GET-request til stien <code>("/")</code>.
+Altså når en klient sender en GET-request til vores server sti, så vil vores Express-app udføre
+den angivne funktion. Her bruger vi <code>res.send()</code> til at sende en simpelt Status 200 OK Code
+som svar på GET-request.
+Så når vi kører <code>app.js</code> fil og går til <code>http://localhost:8080</code> i webbrowser,
+så vil Express-server lytte efter indgående forbindelser på port 8080.
+Man vil køre <code>app.js</code> ved at navigere hen til mappen / stien hvor filen ligger og bagefter 
+skal man skrive kommandoen <code>node app.js</code>. Filen vil altid hedde <code>app.js</code>,
+det gør også så man altid ved hvad filen hedder og hvilke kommando man skal skrive, for at køre serveren.
+</p>

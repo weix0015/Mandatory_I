@@ -8,13 +8,14 @@ import { homepagePage, gitTerminalPage,
   javascriptDatatypesPage, nodeJSPage, 
   typeCoercionPage, restApiDesignPage, 
   javascriptScopingPage, javascriptFunctionPage,
-  packageJsonPage, expressPage } from "./util/readPages.js";
+  packageJsonPage, expressPage,
+  nodeModulesPage, nodemonPage } from "./util/readPages.js";
 
 app.get("/", (req, res) => {
   res.send(homepagePage);
 });
 
-// all endpoints to 02-02/2024
+// all routes endpoints to 02-02/2024
 app.get("/gitTerminals", (req, res) => {
   res.send(gitTerminalPage);
 });
@@ -35,7 +36,7 @@ app.get("/restApiDesigns", (req, res) => {
   res.send(restApiDesignPage);
 });
 
-// all endpoints to 09-02/2024
+// all routes endpoints to 09-02/2024
 app.get("/javascriptScopings", (req, res) => {
   res.send(javascriptScopingPage);
 });
@@ -52,6 +53,14 @@ app.get("/express", (req, res) => {
   res.send(expressPage);
 });
 
+app.get("/nodeModules", (req, res) => {
+  res.send(nodeModulesPage);
+});
+
+// all routes endpoints to 09-02/2024
+app.get("/nodemon", (req, res) => {
+  res.send(nodemonPage);
+});
 
 const PORT = 8080;
 app.listen(PORT, () => console.log("Server is running on port ", PORT));
