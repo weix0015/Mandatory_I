@@ -1,0 +1,32 @@
+<h1 id="top_header">Package Json</h1>
+<p>Package Json, det er en fil, der bruges i Node.js-projekter <code>(package.json)</code>,
+som bruges til at holde styr på projektets afhængigheder <code>(dependencies)</code>
+og konfigurationer.
+<br>
+Der er et værktøj, som hedder <code>npm</code>, som står for Node Package Manager, som følger med node.js
+og det bruges til at administrere og installere pakker (biblioteker og moduler) til node.js-projekter.
+<br>Der skal oprettes en package.json fil ved at køre <code>npm init</code> i terminalen i projektmappen.
+Det vil starte en interaktiv proces, hvor du kan konfigurere dit projekt 
+og oprette en <code>package.json</code> fil.
+<br>Man kan tilføje de pakker, man har brug for, til <code>dependencies</code> sektionen i 
+<code>package.json</code> filen. Efter man har tilføjet alle ens afhængigheder / dependencies,
+så kan man køre <code>npm install</code> i terminalen i ens projektmappe og <code>npm</code>
+vil derefter automatisk installere alle de specificerede pakker og oprette en 
+<code>node_modules</code> mappe i projektmappen. Eksempel på package.json
+<br><br>package.json
+<pre><code>{
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}</code></pre>
+Det er et eksempel på indholdet i en <code>package.json</code> fil. I det her tilfælge defineres
+afhængighederne for projektet, hvor <code>express</code> modulet er specificerede som en afhængighed,
+med version <code>"4.18.2"</code>. Det betyder altså, når kommandoen <code>npm install</code>
+bliver tastet i terminalen i ens projektmappe, så vil <code>npm</code> automatisk installere 
+<code>express</code> modulet i projektet, så det kan bruges i koden.
+<br>JSON det er en format, en fil type og det står for JavaScript Object Notation.
+Det er et nemt læseligt dataudvekslingsformat, som bruges til at sende og modtage data.
+Det er samme format der bruges til at skrive <code>package.json</code> filer og konfigurationsfiler
+i mange andre programmeringsprog, teknologier og værktøjer.
+<img id="json_image" src="/assets/images/json.png" alt="json">
+</p>

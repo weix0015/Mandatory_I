@@ -44,3 +44,14 @@ const javascriptFunction = readPage("./public/pages/javascript_function/javascri
 export const javascriptFunctionPage = renderPage(javascriptFunction, {
   tabTitle: "JavaScript Function"
 });
+
+const packageJson = readPage("./public/pages/package.json/package.json.html");
+export const packageJsonPage = renderPage(packageJson, {
+  tabTitle: "Package Json",
+  CSSLink: '<link rel="stylesheet" href="/pages/package.json/package.json.css">'
+});
+
+const express = readPage("./public/pages/express/express.html");
+export const expressPage = renderPage(express, {
+  tabTitle: "Express"
+});
