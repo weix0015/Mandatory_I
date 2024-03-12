@@ -7,7 +7,7 @@ app.use(express.static("public"));
 import { homepagePage, gitTerminalPage, 
   javascriptDatatypesPage, nodeJSPage, 
   typeCoercionPage, restApiDesignPage, 
-  javascriptScopingPage } from "./util/readPages.js";
+  javascriptScopingPage, javascriptFunctionPage } from "./util/readPages.js";
 
 app.get("/", (req, res) => {
   res.send(homepagePage);
@@ -40,7 +40,7 @@ app.get("/javascriptScopings", (req, res) => {
 });
 
 app.get("/javascriptFunctions", (req, res) => {
-  res.send(javascriptFunctionsPage);
+  res.send(javascriptFunctionPage);
 });
 
 

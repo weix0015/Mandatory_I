@@ -1,0 +1,71 @@
+<h1 id="top_header">JavaScript Function</h1>
+      <p>I javascript er der hoisting, som betyder at funktioner og variabler 
+        kan tilgås, før de er deklaret. Altså de bliver løftet op til toppen af
+        deres scope før alle code execution.
+        <br><br>Hoisting
+        <pre><code>let word;
+console.log(word); // Output undefined
+word = "Hello";
+console.log(word); // Output "Hello"</code></pre>
+Her er et eksempel, hvor word bliver først decleared efter output undefined, 
+og så output den igen, hvor resultatet vil være "Hello".
+<br><br>I javascript er der forskellige funktioner.
+<br><br>Anonymous Function
+<pre><code>const getRandomIntAnonymousFunction = function (min, max) {
+  return Math.floor(Math.random() * (max + 1 - min) + min);
+};</code></pre>
+Det er et eksempel på en Anonymous function, som har 2 parameter, 
+det er 2 tal som input, hvor funktionen returnerer et tilfældigt helttal. 
+Den bruger <code>Math.random()</code> som bruges til at generere et tilfældigt decimaltal
+mellem 0 og 1, og derefter omregnes det til et heltal ind i intervallet.
+Anonymous funktioner er funktioner uden et navn. De oprettes direkte som en værdi
+og tildeles ofte til enten variabler eller bruges som argumenter til andre funktioner. 
+funktioner kan udføre en handling, men da de ikke har noget navn, så kan de ikke kaldes
+udenfor det scope, som de er defineret, medmindre de er tildelt til en variabel.
+<br><br>Arrow Function
+<pre><code>const getRandomIntArrowFunction = (min, max) => {
+  return Math.floor(Math.random() * (max + 1 - min) + min);
+};</code></pre>
+Det er et eksempel på en arrow function. I javascript kan en arrow function på en enkelt linje,
+altså hvis den kun indeholder en instruktion, kan <code>{ }</code> og <code>return</code> keyword
+udelades, som gør koden mere kompakt. Det kan også skrives i flere linjer med <code>{ }</code>
+og <code>return</code> keyword, men det behøves det ikke hvis det kun indeholder 1 instruktion.
+I det her eksempel er det en arrow function, der genere et tilfældigt heltal inden for et givet
+interval <code>min</code> og <code>max</code>. Den bruger <code>Math.random()</code> og 
+<code>Math.floor()</code> metoderne til at genere et random heltal.
+<pre><code>const calculateArea = (width, height) => {
+  const area = width * height;
+  return area;
+};
+
+console.log(calculateArea(5, 3)); // Output 15</code></pre>
+Her er et eksempel på arrow function med <code>{ }</code> og <code>return</code> keyword,
+hvor det ikke er en one liner. Det tager imod 2 parametre <code>width</code> og <code>height</code>.
+Funktionen beregner arealet ud af en rektangel ved multiplikation af bredden med højden og returnerer
+resultatet.
+<br><br>Callback eller callback-function
+<pre><code>function performAction(callback) {
+  callback();
+}
+
+function greet() {
+  console.log("Hello!");
+}
+
+performAction(greet); // Output "Hello!"</code></pre>
+Det er et eksempel på callback / callback-function. Det er en reference til executeable code,
+der sendes som et argument til en anden del af koden.
+I det her eksempel, så bliver der kaldt på <code>performAction</code> function med <code>greet</code>
+som input, <code>greet</code> funktionen <code>console.log("Hello!")</code> ud så når performAction
+bliver kaldt med greet som input, vil funktionen performAction udføre det, hvor der er givet
+callback som input, så vil den output "Hello!" med andre ord.
+<pre><code>function performAction(callback) {
+  callback(); // 3. Execute the function provided as input (callback)
+}
+
+function greet() {
+  console.log("Hello!"); // 2. Defines the action to output "Hello!"
+}
+
+performAction(greet); // 1. Calls performAction with greet as input</code></pre>
+      </p>

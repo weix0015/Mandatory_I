@@ -27,8 +27,7 @@ function testFunction() {
 }
 
 testFunction();
-console.log(global); // Output "global scope"
-</code></pre> det er et global scope, 
+console.log(global); // Output "global scope"</code></pre> det er et global scope, 
 hvor variablen kan bruges over alt i koden, som man kan se i eksempelt, 
 den kan bruges inde i funktionen men også uden for funktionen.
 <br><br>
@@ -37,9 +36,9 @@ function scope
   let name = "world";
   console.log(name); // Output "world"
 }
+
 someFunction();
-console.log(name); // ReferenceError: name is not defined
-</code></pre>
+console.log(name); // ReferenceError: name is not defined</code></pre>
 Det er eksempel på function scope, hvor variablen name, kun kan bruges inde i funktionen.
 Function scope er hvor alt inde i funktion kan bruges inde i funktion og 
 hvis man prøver at bruge det uden for funktionen så får man ReferenceError, 

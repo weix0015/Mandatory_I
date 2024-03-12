@@ -39,3 +39,8 @@ const javascriptScoping = readPage("./public/pages/javascript_scoping/javascript
 export const javascriptScopingPage = renderPage(javascriptScoping, {
   tabTitle: "JavaScript Scoping"
 });
+
+const javascriptFunction = readPage("./public/pages/javascript_function/javascript_function.html");
+export const javascriptFunctionPage = renderPage(javascriptFunction, {
+  tabTitle: "JavaScript Function"
+});
