@@ -1,3 +1,83 @@
       <h1 id="top_header">JavaScript Scoping</h1>
-      <p>
+      <p>JavaScript bruges der const, let og var. Man skal altid bruge const og let 
+            hvis man ikke kan bruge const, derudover skal man aldrig bruge var,
+            fordi var er ikke block scope. Det kan skabe side effects, 
+            som eksempel neden under: <pre><code>for (var i = 0; i < 10; i++) {
+  setTimeout(function() {
+    console.log(i); // Output 10 ten times
+  }, 1000);
+}</code></pre>
+Fordi der bruges var i stedet for let, så er det ikke blockscope, som betyder at
+<code>i</code> vil have den sidste værdi, den får i loop, når <code>setTimeout</code>
+udføres, det er på grund af <code>setTimeout</code> kører efter loopet er færdig,
+og på det tidspunkt så vil værdien af <code>i</code> blive øget til 10.
+Hvis der bruges let i stedet for var vil det være blockscope 
+og udskrives output 0 - 9. Med let vil den specifikke <code>i</code> 
+værdi iteration af loop, hvilket giver os resultatet 0 - 9, 
+hvor den printer ud fra 0 og increament hver iteration, 
+imodsætning til var som giver os 10 som output 10 gange.
+<br><br>I JavaScript hvis der bruges const så kan const ikke være undecleared 
+eller redecleared men dens værdi kan godt blive ændret så længe 
+der ikke ændres på dens assignment.
+Der er forskellige scope i javascript.<br><br>
+global scope
+<pre><code>let global = "global scope";
+function testFunction() {
+  console.log(global); // Output "global scope"
+}
+
+testFunction();
+console.log(global); // Output "global scope"
+</code></pre> det er et global scope, 
+hvor variablen kan bruges over alt i koden, som man kan se i eksempelt, 
+den kan bruges inde i funktionen men også uden for funktionen.
+<br><br>
+function scope
+<pre><code>function someFunction() {
+  let name = "world";
+  console.log(name); // Output "world"
+}
+someFunction();
+console.log(name); // ReferenceError: name is not defined
+</code></pre>
+Det er eksempel på function scope, hvor variablen name, kun kan bruges inde i funktionen.
+Function scope er hvor alt inde i funktion kan bruges inde i funktion og 
+hvis man prøver at bruge det uden for funktionen så får man ReferenceError, 
+fordi variablen er ikke defined uden for funktionen.
+<br><br>
+block scope
+<pre><code>function anotherFunction() {
+  if (true) {
+    let test = "test now";
+    console.log(test); // Output "test now"
+  }
+  console.log(test); // ReferenceError: test is not defined
+}
+
+anotherFunction();</code></pre>
+Det er et eksempel på block scope, hvor variablen test, har man kun adgang til
+og kan kun bruges inden for block scope, altså inden for if statementets blok.
+I javascript så er hedder det let lexical scope, altså når vi bruger let til 
+erklære variabler, er deres scope bestemt af den nærmeste blok, 
+som er der hvor de er deklareret, uanset om det er en funktion, et loop eller if-else statement.
+<br><br>let lexical scope
+<pre><code>function outerFunction() {
+  let outer = "outer";
+
+  function innerFunction() {
+    let inner = "inner";
+    console.log(inner); // Output "inner"
+    console.log(outer); // Output "outer"
+  }
+
+  innerFunction();
+  console.log(inner); // ReferenceError: inner is not defined
+}
+
+outerFunction();</code></pre>
+Her er et eksempel, på let lexical scope, hvor variablen inde i outerFunktionen har man adgang til 
+også inden i innterFunktionen, da dens scope afhænger af hvor den er deklaret, 
+og i det her tilfælge er det inde i outerFunction, så både outer og inner kan bruges i innerFunction,
+men inner variablen kan ikke bruges i outerFunction kun i dens scope som er i innerFunction. 
+Det er også derfor man vil få en ReferenceError hvis man vil <code>console.log(inner);</code> uden for scope.
       </p>
