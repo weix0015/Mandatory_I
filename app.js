@@ -4,40 +4,43 @@ const app = express();
 
 app.use(express.static("public"));
 
-import path from "path";
+import { homepagePage, gitTerminalPage, 
+  javascriptDatatypesPage, nodeJSPage, 
+  typeCoercionPage, restApiDesignPage, 
+  javascriptScopingPage } from "./util/readPages.js";
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("public/pages/homepage/homepage.html"));
+  res.send(homepagePage);
 });
 
 // all endpoints to 02-02/2024
 app.get("/gitTerminals", (req, res) => {
-  res.sendFile(path.resolve("public/pages/git_terminal/git_terminal.html"));
+  res.send(gitTerminalPage);
 });
 
 app.get("/javascriptDatatypes", (req, res) => {
-  res.sendFile(path.resolve("public/pages/javascript_datatypes/javascript_datatypes.html"));
+  res.send(javascriptDatatypesPage);
 });
 
 app.get("/nodejs", (req, res) => {
-  res.sendFile(path.resolve("public/pages/node.js/node.js.html"));
+  res.send(nodeJSPage);
 });
 
 app.get("/typeCoercions", (req, res) => {
-  res.sendFile(path.resolve("public/pages/type_coercion/type_coercion.html"));
+  res.send(typeCoercionPage);
 });
 
 app.get("/restApiDesigns", (req, res) => {
-  res.sendFile(path.resolve("public/pages/rest_api_design/rest_api_design.html"));
+  res.send(restApiDesignPage);
 });
 
 // all endpoints to 09-02/2024
 app.get("/javascriptScopings", (req, res) => {
-  res.sendFile(path.resolve("public/pages/javascript_scoping/javascript_scoping.html"));
+  res.send(javascriptScopingPage);
 });
 
 app.get("/javascriptFunctions", (req, res) => {
-  res.sendFile(path.resolve("public/pages/javascript_scoping/javascript_scoping.html"));
+  res.send(javascriptFunctionsPage);
 });
 
 
