@@ -9,8 +9,8 @@ import { homepagePage, gitTerminalPage,
   typeCoercionPage, restApiDesignPage, 
   javascriptScopingPage, javascriptFunctionPage,
   packageJsonPage, expressPage,
-  nodeModulesPage, nodemonPage,
-  loopMethods } from "./util/readPages.js";
+  nodeModulesPage, nodemonPage, 
+  loopMethodsPage } from "./util/readPages.js";
 
 app.get("/", (req, res) => {
   res.send(homepagePage);
@@ -64,7 +64,7 @@ app.get("/nodemon", (req, res) => {
 });
 
 app.get("/loopMethods", (req, res) => {
-  res.send(loopMethods);
+  res.send(loopMethodsPage);
 });
 
 const PORT = 8080;

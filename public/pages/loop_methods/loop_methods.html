@@ -1,0 +1,118 @@
+<h1 id="top_header">Loop Methods</h1>
+<p>I JavaScript er der loop metoder, som er praktiske og gode at bruge hvis man skal arbejde med arrays.
+  <br>Map er en af loop metoderne i javascript, som bruges til at iterere over hvert element i en samling
+  (f.eks. et array eller en string) og efter iterationen vil der så blive oprettet et nyt array med de nye
+  resultater af en bestemt handling på hvert element. I det her eksempel så ganges hvert tal i arrayet med 2.
+  <br><br>Map
+  <pre><code>// multiply each number in the array with 2
+const numbers = [1, 2, 3];
+const doubled = numbers.map(num => num * 2);
+
+console.log(doubled); // Output: [2, 4, 6]</code></pre>
+Men Map kan også bruges på andre samlinger, f.eks. en<code>string</code>, hvor hver karakter i den 
+<code>string</code> bliver transformeret f.eks. kan man gøre hvert karakter i en <code>string</code>
+fra lowercase til uppercase.
+<br><br>Uppercase med Map
+<pre><code>// convert each character in a string to uppercase
+const str = "hello";
+const uppercaseStr = str.split("").map(char => char.toUpperCase()).join("");
+
+console.log(uppercaseStr); // Output: HELLO</code></pre>
+I det her eksempelt, så bruger vi <code>str.split("")</code> til at dele det oprindelig string 
+<code>str = "hello"</code> op i et array af enkelte tegn, hvor metoden <code>split("")</code>,
+der angiver vi en separator som et tomt string <code>""</code>, det betyder vi opdeler string karakter 
+for hvert karakter, da vi angiver det uden whitespace. Så de vil blive opdelt karakter for karakter.
+Derefter har vi et array hvor hvert karakter fra vores string er elementer i arrayet.
+<pre><code>const str = "hello";
+const characters = str.split("");
+
+console.log(characters); // Output: ['h', 'e', 'l', 'l', 'o']
+</code></pre>
+Bagefter så bruges der metoden <code>join("")</code>, hvor vi bruger den til at samle elementerne 
+fra arrayet til en string, som vi har angivet med separatoren <code>""</code>, fordi det den er tomt, så samles
+alle elementerne uden nogen mellemrum.
+<pre><code>const characters = ['h', 'e', 'l', 'l', 'o'];
+const str = characters.join("");
+
+console.log(str); // Output: hello
+</code></pre>
+Men i vores tidligere eksempel, så declare vi en string laver en ny variable, som er den samme string, men
+hvor vi bruger <code>spilt()</code> til at dele dem ind i et nyt array, og bruger map til at iterere igennem arrayet,
+hvor hvert karakter / element i det nye array bliver transformeret til uppercase, når vi bruger metoden
+<code>toUpperCase()</code>, hvor vi så til sidst bruger <code>join("")</code>, som gør vi samler alle karakterne /
+elementerne sammen så vi går fra <code>['h', 'e', 'l', 'l', 'o']</code> til <code>hello</code>
+<br><br>
+Der findes også andre loop metoder i javascript, som f.eks. Filter
+<code>filter</code> metoden bruges til at vælge elementer fra en samling baseret på en condition og vil derefter oprette
+et nyt array med de valgte elementer.
+<br>Eksempel
+<pre><code>// Even numbers 
+const numbers = [1, 2, 3, 4, 5];
+const evenNumbers = numbers.filter(num => num % 2 === 0);
+
+console.log(evenNumbers); // Output: [2, 4]</code></pre>
+I det her eksempel, har vi en array med 5 tal, hvor vi bruger filter metoden til at vælge 
+elementer fra arrayet på vores ene condition <code>num % 2 === 0</code>, som betyder at hvis
+vores tallet divideret med 2, og dens rest tilbage er 0, fordi modulus betyder devidere og resten der er tilbage
+f.eks <code>3 % 2 = 0.5</code> fordi  <code>3 / 2 = 1.5</code> modulus operator vil så kun tage resten tilbage,
+som er decimal tallet altså efter kommaet, som i det her eksempel er 0.5.
+Så vores condition det er hvis tallet divideret med 2 og resten af tallet giver 0, fx <code>2 / 2 = 1.0</code>
+så vil den vælge det element fra samling. Altså alle de ligetal. og oprette et nyr array med kun ligetal.
+<br><br>
+Der findes også loop metoden Reduce
+<br><code>reduce</code> metoden, den bruges til at reducere en samling til en enkelt værdi ved at 
+udføre en handling på hvert element og i vores eksempel, så reducere <code>reduce</code> metoden
+vores array som indeholder 5 elementer som er tal 1 - 5, hvor på hvert element bliver der udført 
+<code>(akkumulator + current)</code>, hvor vi angiver at den skal starte på 0.
+<pre><code>const numbers = [1, 2, 3, 4, 5];
+const sum = numbers.reduce((accumulator, current) => accumulator + current, 0);
+
+console.log(sum); // Output: 15</code></pre>
+Det der sker i det her eksempel i hvert iteration er vi ligger accumulator + current sammen, 
+hvor accumulor starter på 0, så det vil være sådan her
+<pre><code>accumulator: 0, current: 1 // accumulator + current = 0 + 1 = 1
+accumulator: 1, current: 2 // accumulator + current = 1 + 2 = 3
+accumulator: 3, current: 3 // accumulator + current = 3 + 3 = 6
+accumulator: 6, current: 4 // accumulator + current = 6 + 4 = 10
+accumulator: 10, current: 5 // accumulator + current = 10 + 5 = 15</code></pre>
+Så efter alle iterationerne så vil vi få 15, som output fra vores <code>console.log(sum);</code>.
+<br>
+Men Map, Filter og Reduce de kan også bruges på andre ting end arrays, de bruges på en samling af data,
+som f.eks. Strings og Set (En samling af unikke værdier).
+<br><br>
+Den vigtige grund til vi bruger loop metoder i stedet for <code>for loop</code>, det er fordi vi gerne vil
+undgå sideeffects, og det gør koden mere forudsigelig og vedligeholdbar.
+Grunden til vi bruger <code>for loop</code> kun til at tælle som f.eks.
+<pre><code>for (let i = 0; i <= 3; i++) {
+  console.log(i); // Output: 0, 1, 2, 3
+}</code></pre>
+Grunden til der kommer sideeffects hvis vi bruger for loop, til andre opgaver end at tælle, det er fordi,
+hvis vi manipulerer med data i et array f.eks. kan der opstå sideeffects. Det er fordi, at vi direkte ændrer
+dataene i arrayet, som kan have utilsigtede konsekvenser, især hvis der er andre dele af koden, som er afhængige
+af den oprindelige array altså før vi ændret dataene i arrayet. Det kan gøre koden både sværere at forstå og finde
+fejl og debugging vil være en større udfordring, hvis ændringer er skjulte og uforsigelige. Ved at bruge loop metoder,
+så reducerer risikoen for sideeffects også.
+<br><br>
+Eksempel på sideeffects med for loop
+<pre><code>let numbers = [1, 2, 3, 4];
+
+for (let i = 0; i < numbers.length; i++) {
+  numbers[i] *= 2;
+}
+
+console.log(numbers); // Output: [2, 4, 6, 8]
+</code></pre>
+I det her eksempel, så ganger vi alle tal i arrayet med 2, men det gør at vores array nu er <code>[2, 4, 6, 8]</code>
+hvilket gør hvis vi skal bruge det oprindelig array <code>[1, 2, 3, 4]</code>, så kan vi ikke fordi der er opstået
+side effects ved at bruge for loop, til at manipulerer / ændrer på dataene i array.
+<br><br>
+Eksempel uden sideeffects med map
+<pre><code>let numbers = [1, 2, 3, 4];
+let doubledNumbers = numbers.map(num => num * 2);
+
+console.log(doubledNumbers); // Output: [2, 4, 6, 8]
+console.log(numbers); // Output: [1, 2, 3, 4]</code></pre>
+I det her eksempel, hvor vi bruger <code>map</code> metoden undgår vi side effects og kan altid tilgå den oprindelig
+array og også det nye array, hvor dataene er ændret. Som god stil og praktisk, så altid brug loop metoder, og kun 
+for loop til at tælle og ikke til at manipulerer med dataene inde i arrayet eller andre slags collection af data.
+</p>
