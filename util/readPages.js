@@ -49,7 +49,7 @@ export const javascriptFunctionPage = renderPage(javascriptFunction, {
 
 const packageJson = readPage("./public/pages/package.json/package.json.html");
 export const packageJsonPage = renderPage(packageJson, {
-  tabTitle: "Package Json",
+  tabTitle: "Package JSON",
   CSSLink: '<link rel="stylesheet" href="/pages/package.json/package.json.css">'
 });
 
@@ -75,4 +75,14 @@ export const nodemonPage = renderPage(nodemon, {
 const loopMethods = readPage("./public/pages/loop_methods/loop_methods.html");
 export const loopMethodsPage = renderPage(loopMethods, {
   tabTitle: "Loop Methods"
+});
+
+const url = readPage("./public/pages/url/url.html");
+export const urlPage = renderPage(url, {
+  tabTitle: "URL"
+});
+
+const postRequest = readPage("./public/pages/post_request/post_request.html");
+export const postRequestPage = renderPage(postRequest, {
+  tabTitle: "POST Request"
 });
