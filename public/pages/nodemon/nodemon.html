@@ -1,2 +1,38 @@
 <h1 id="top_header">Nodemon</h1>
-<p></p>
+<p>Nodemon det er et værktøj, som ofte anvendes under udviklingen af Node.js applikationer
+  for at forbedre udviklingsprocessen. Nodemon primære formål er at overvåge og holde øje
+  med ændringer i filer i ens projekt og automatisk genstarte serveren, når der foretages
+  ændringer i koden, som gør det mere effektivt i udviklingsprocessen i stedet for man selv
+  manuelt skal genstarte serveren hver gang man skal teste sine ændringer.
+  <br><br>
+  Nodemon er specifikt designet til anvendelse i udviklingsmiljøer og det er heller ikke
+  egnet til produktionsmiljøer. Det er fordi, at konstant overvågning af filændringer kan
+  have negative konsekvenser for ydeevnen i et produktionsmiljø. Hvis serveren oftes genstarter
+  fordi der bliver lavet ændringer, så kan det resultere i unødvendige downtime og påvirke ydeevnen,
+  som ikke er acceptabelt i produktionsmiljøer, hvor serveren skal være stabilt og pålidelig.
+  <br<br>
+  Udviklere skal kun bruge nodemon til udviklingsprocessen og ikke til produktion. Det kan bruge
+  nodemon til test under udviklingsprocessen, da den automatisk genstarter serveren, hvis der er
+  nye ændringer i koden. Så de ikke manuelt skal genstarte og kører serveren hver gang de laver ændringer
+  i koden de skal teste. Til produktion bør de helle tiden have serveren op at køre, da der er kunder 
+  og interessenter der bruger deres server, hvis de derudover skal lave ændringer eller nye updates,
+  så kan de bruge (CI/CD) pipeline, som først vil teste ændringerne, hvis alle test pass, så vil det blive
+  godkendt, og så må udviklingens hold <code>commit</code> og <code>pushe</code> til de forskellige branch
+  og først <code>merge</code> det sammen, når de har fået alt til at kører sammen som det skal, så de ikke
+  påvirker serveren som er i produktion.
+  <br><br>
+  For at bruge nodemon og køre det, så skal man først sørge for, at det er installeret enten globalt eller
+  lokalt i projektet man vil bruge det i. Man kan installere nodemon ved at bruge kommandoen 
+  <code>npm install -g nodemon</code> så bliver det installeret globalt, hvis man vil installerer en bestemt
+  version af nodemon kan man også det ved at bruge kommandoen <code>npm i nodemon@2.0.18</code> så har man
+  installeret version 2.0.18 af nodemon lokalt i ens projekt. Der fortrækkes at installere det globalt, hvis
+  man skal bruge det til mange projekter eller til senere brug hvis man skal videreudvikling projekter.
+  <br>
+  For at køre ens Node.js applikation så skal du først være inde i den path din <code>app.js</code> ligger i,
+  bagefter skal man bruge kommandoen <code>nodemon app.js</code> for at køre ens applikation / server med nodemon
+  Det er vigtig man trykke <code>tab</code> efter man har skrevet <code>nodemon</code> kommandoen fordi så 
+  vil det automatisk skrive den sidste del af <code>nodemon</code> kommandoen, fx. på windows så
+  er det kommandoen <code>nodemon.cmd app.js</code> for at køre det. Så det afhænger af ens styresystem. 
+</p>Nodemon officielle website,
+hvis man trykker på billedet, som fører dig hen til nodemon website<br><br><br>
+<img id="nodemon_image" src="/assets/images/nodemon.png" alt="nodejs">

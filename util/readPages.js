@@ -67,5 +67,12 @@ export const nodeModulesPage = renderPage(nodeModules, {
 // all pages to 09-02/2024
 const nodemon = readPage("./public/pages/nodemon/nodemon.html");
 export const nodemonPage = renderPage(nodemon, {
-  tabTitle: "Nodemon"
+  tabTitle: "Nodemon",
+  CSSLink: '<link rel="stylesheet" href="/pages/nodemon/nodemon.css">',
+  JavascriptScript: '<script src="/pages/nodemon/nodemon.js"></script>'
+});
+
+const loopMethods = readPage("./public/pages/loop_methods/loop_methods.html");
+export const loopMethodsPage = renderPage(loopMethods, {
+  tabTitle: "Loop Methods"
 });
