@@ -1,4 +1,4 @@
-import { renderPage, readPage } from "./templatingEngine.js"; 
+import { renderPage, readPage } from "./templatingEngine.js";
 
 const home = readPage("./public/pages/homepage/homepage.html");
 export const homepagePage = renderPage(home, {
@@ -31,7 +31,7 @@ export const typeCoercionPage = renderPage(typeCoercion, {
 });
 
 const restApiDesign = readPage("./public/pages/rest_api_design/rest_api_design.html");
-export const restApiDesignPage = renderPage(restApiDesign , {
+export const restApiDesignPage = renderPage(restApiDesign, {
   tabTitle: "REST API Design",
   CSSLink: '<link rel="stylesheet" href="/pages/rest_api_design/rest_api_design.css">'
 });
