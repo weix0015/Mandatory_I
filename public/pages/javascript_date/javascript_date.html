@@ -1,0 +1,57 @@
+<h1 id="top_header">JavaScript Date</h1>
+<p>I JavaScript kan man bruge <code>Date</code>. <code>Date</code> det er et <code>object</code> i javascript.
+som har en række metoder man kan bruge til at arbejde med datoer og klokkeslæt og tid. Det gør det muligt at 
+manipulere med format af datoer, det er godt til håndtering af tidsrelateret oplysning som dato, tidspunkt, klokken
+sekunder osv.
+Her er nogle eksempler på dem.
+<pre><code>console.log(new Date()); // 2024-03-19T18:52:58.438Z</code></pre>
+I det her eksempel opretter vi et nyt <code>Date object</code>, det repræsenterer det aktuelle tidspunkt i UTC-format.
+I <code>console.log()</code>, og generelt, når <code>new Date()</code> bliver kaldt uden argumenter, så returneres det,
+den aktuelle dato og tid.
+Som du har lagt mærke til så er vi 1 time bagud i tiden, det er fordi det svarer til UTC tidspunkt.
+Output på <code>console.log(new Date())</code>, som er <code>2024-03-19T18:52:58.438Z</code>, det står for<br>
+<ul>
+  <li><strong>Year:</strong> 2024</li>
+    <li><strong>Month:</strong> March (03)</li>
+    <li><strong>Day:</strong> 19</li>
+    <li><strong>Hour:</strong> 18</li>
+    <li><strong>Minute:</strong> 52</li>
+    <li><strong>Second:</strong> 58</li>
+    <li><strong>Millisecond:</strong> 438</li>
+    <li><strong>Timezone:</strong> Z (Zulu), corresponding to UTC</li>
+</ul>
+<pre><code>console.log(Date.now()); // Unix Epoch Time (Seconds since 1970 Jan. 1st)</code></pre>
+I det her eksempelt bruger vi <code>Date.now()</code> til at få sekunder siden Unix Epoch Tid (1. januar 1970).
+<pre><code>console.log(Date()); // Local Time (in my case right now and here CEST GMT+0100)</code></pre>
+I det her eksempelt, så vil den output det aktuelle lokale tidspunkt. Altså det sker når <code>Date()</code>
+bliver kaldt uden <code>new</code> keyword, så returneres der en string, der repræsenterer det aktuelle tidspunkt
+i lokal tidszone.
+<pre><code>const dayOfMonth = new Date().getDate();
+console.log(dayOfMonth); // Output: 19 (for 19th in the month)</code></pre>
+I det her eksempel, så bruger vi <code>getDate()</code> metoden, det bruges til at hente dagen i måneden fra det 
+aktuelle <code>Date object</code>. I det her tilfælde er det 19, da datoen er 3/19-2024. Men hvis det bliver output
+en anden dag, så vil output skifte til den dag, i måneden det er, altså datoen men kun for dag.
+<pre><code>const monthIndex = new Date().getMonth();
+console.log(monthIndex); // Output: 2 (for march)</code></pre>
+I det her eksempel, det anvender vi <code>getMonth()</code>, det gør vi får index af den aktuelle måned. 
+I det her tilfælde vil det returnere 2 fordi det er marts måned.
+<pre><code>const year = new Date().getFullYear();
+console.log(year); // Output: 2024 (for year 2024)</code></pre>
+I det her eksempel, der bruges der <code>getFullYear()</code>, det bruges til at hente det aktuelle år fra 
+<code>Date object</code>, det er et eksempelt, hvor man får årstal ud fra den aktuelle år, som er 2024 i år.
+<pre><code>const hours = new Date().getHours();
+const minutes = new Date().getMinutes();
+const seconds = new Date().getSeconds();
+console.log(hours, minutes, seconds); // Output: 20:23:00</code></pre>
+I det her eksempel, der bruger vi <code>getHours()</code>, <code>getMinutes()</code> og <code>getSeconds()</code>
+til at hente det aktuelle tidspunkt i timer, minutter og sekunder, og lægt mærke til output, kommer afhænger, af
+hvad tidspunkt er, fordi den kan ændre sige, mit output, er kun det nuværende tidspunkt.
+<pre><code>const dateString = new Date().toString();
+console.log(dateString); // Output: Tue Mar 19 2024 20:27:00 GMT+0100 (Central European Standard Time)</code></pre>
+I det her eksempelt, der bruger vi <code>toString()</code> metoden til at konverterer det aktuelle tidspunkt ud til
+en, og igen, output kommer an på nuværende tidspunkt så output kan ændre sig i forhold til tidspunkt.
+<pre><code>const localDateString = new Date().toLocaleDateString();
+console.log(localDateString); // Output: 3/19/2024</code></pre>
+Her bruger vi <code>toLocaleDateString()</code> til at få det aktuelle tidspunkt i det lokale datoformat, og format 
+af output kan ændre sig i forhold til den lokale format, og det samme med tidspunkt, for mig er det 3/19/2024 i dag.
+</p>

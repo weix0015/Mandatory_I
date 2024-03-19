@@ -98,3 +98,19 @@ const crudableRestApi = readPage("./public/pages/crudable_rest_api/crudable_rest
 export const crudableRestApiPage = renderPage(crudableRestApi, {
   tabTitle: "CRUDable Rest API"
 });
+
+const javascriptDate = readPage("./public/pages/javascript_date/javascript_date.html");
+export const javascriptDatePage = renderPage(javascriptDate, {
+  tabTitle: "JavaScript Date"
+});
+
+const fetchMethod = readPage("./public/pages/fetch_method/fetch_method.html");
+export const fetchMethodPage = renderPage(fetchMethod, {
+  tabTitle: "Fetch Method"
+});
+
+// all pages to 01-03/2024
+const importExportHtml = readPage("./public/pages/import_export_html/import_export_html.html");
+export const importExportHtmlPage = renderPage(importExportHtml, {
+  tabTitle: "Import / Export HTML"
+});

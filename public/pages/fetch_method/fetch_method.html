@@ -1,0 +1,26 @@
+<h1 id="top_header">Fetch Method</h1>
+<p>Fetch Method, det er en metode indbygget i javascript, som bruges til at foretag HTTP-request til servere og hente data.
+  Det er for eksempel at hente data fra et api.
+  <br>
+  Fetch metoden, den tager en <code>URL</code> som argument og returnerer en <code>Promise</code>, der repræsenterer
+  resultatet af requesten. Når der bruges <code>fetch()</code> og requesten bliver udført, så vil <code>Promise</code>
+  blive opfyldt af et <code>Respons object</code>, som indeholder respons fra serveren.
+  Her er et eksempel på dette.
+  <pre><code>fetch("https://api.example.com/data")
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error("Error:", error));</code></pre>
+I det her eksempelt, så bruger vi <code>fetch()</code> metoden, til at request til URL'en 
+<code>https://api.example.com/data</code>, den request vil være et <code>GET-Request</code> til den addresse.
+Efter det, så bruger vi <code>.then()</code> metoden, det er for at håndtere respons fra serveren. Det bruges til
+når serveren sender respons tilbage, så <code>.then()</code> metoden bruger vi altså til at definerer og fortælle,
+hvad der skal ske med det respons vi får tilbage fra serveren. Det der sker er, at vi venter på respons tilbage fra
+serveren, når vi har modtaget respons fra serveren, så bruger vi <code>json()</code> metoden til at parse respons
+som <code>JSON-data</code>. Så fortsætter vi, når vi har fået <code>JSON-data</code>, så logger vi dataen ud i konsolen.
+Det betyder at det respons vi får fra serveren, parse vi med <code>json()</code> og bagefter output vi det data ud
+i konsolen ved at bruge <code>console.log()</code>.
+Hvis der opstår en fejl, og vi ikke får respons tilbage fra serveren, så har vi håndteret hvis der skulle opstå en fejl,
+det der sker når der opstår en fejl under vores request er, at vi 
+<code>.catch(error => console.error("Error:", error))</code> , det betyder vi fanger denne fejl og output fejlbeskeden
+ud til konsolen med <code>console.error()</code>, så vi kan se fejlbeskeden.
+</p>
