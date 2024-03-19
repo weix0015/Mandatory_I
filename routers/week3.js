@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {nodemonPage, loopMethodsPage,
-  urlPage, postRequestPage } from "../util/readPages.js";
+  urlPage, postRequestPage,
+bodyParsingPage } from "../util/readPages.js";
 
 const router = Router();
 
@@ -18,6 +19,10 @@ router.get("/urls", (req, res) => {
 
 router.get("/postRequests", (req, res) => {
   res.send(postRequestPage);
+});
+
+router.get("/bodyParsings", (req, res) => {
+  res.send(bodyParsingPage);
 });
 
 export default router;

@@ -64,7 +64,7 @@ export const nodeModulesPage = renderPage(nodeModules, {
   CSSLink: '<link rel="stylesheet" href="/pages/node_modules/node_modules.css">'
 });
 
-// all pages to 09-02/2024
+// all pages to 16-02/2024
 const nodemon = readPage("./public/pages/nodemon/nodemon.html");
 export const nodemonPage = renderPage(nodemon, {
   tabTitle: "Nodemon",
@@ -85,4 +85,16 @@ export const urlPage = renderPage(url, {
 const postRequest = readPage("./public/pages/post_request/post_request.html");
 export const postRequestPage = renderPage(postRequest, {
   tabTitle: "POST Request"
+});
+
+const bodyParsing = readPage("./public/pages/body_parsing/body_parsing.html");
+export const bodyParsingPage = renderPage(bodyParsing, {
+  tabTitle: "Body Parsing",
+  CSSLink: '<link rel="stylesheet" href="/pages/body_parsing/body_parsing.css">'
+});
+
+// all pages to 23-02/2024
+const crudableRestApi = readPage("./public/pages/crudable_rest_api/crudable_rest_api.html");
+export const crudableRestApiPage = renderPage(crudableRestApi, {
+  tabTitle: "CRUDable Rest API"
 });

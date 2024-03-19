@@ -1,4 +1,85 @@
 <h1 id="top_header">POST Request</h1>
 <p>POST-Request, det er en af de HTTP-requests, der bruges til at sende data fra klienten til serveren.
-  Den bruges ofte, hvis klienten ønsker at oprette en ny ressource på serveren, f.eks. at tilføje en ny produkt, 
+  Den bruges ofte, hvis klienten ønsker at oprette en ny ressource på serveren, f.eks. at tilføje en ny produkt,
+  det kan være en ny drink, eller andre produkter. Det kan også være oprette en bog, kommer helt an på hjemmesiden.
+  En POST-Request vil være at brugeren eller kunden interagere med hjemmesiden, hvor det så er en POST-Request, hvor
+  hvis det er gennem hjemmesiden, så har udviklerne allerede udviklet, så kunden, tilføjer / input nye informationer
+  til det product de fil tilføje, men hvis man fx. bruger postman eller andre værktøjer som postman, hvor man kan sende
+  forskellige slags request. Men i en POST-Request, så sender man en json til serveren, hvor den json indeholder de
+  nye ting der skal blive oprettet det kan fx. være på endpoint / url
+  <pre><code>https://shop.com/products
+Method: POST
+Content-Type: application/json
+Body (raw JSON):</code></pre>
+  <pre><code>{
+  "name": "Smartphone",
+  "price": 599.99,
+  "description": "Samsung Galaxy S21 128GB"
+}</code></pre>
+I eksemplet her, der requester vi til endpoint / url <code>https://shop.com/products</code>
+ved at bruge HTTP metoden POST. Det vil sige, at vi beder serveren om at oprette noget nyt på den url.
+Ved at inkludere headeren <code>Content-Type: application/json</code>, så fortæller vi serveren, at vi dataen vi sender
+er i <code>JSON-format</code>.<br>I <code>request body</code> inkludere vi alt information om det produkt, 
+i det her tilfælde. Produktet hedder <code>Smartphone</code>, det koster <code>599.99</code>, og beskrives som
+<code>Samsung Galaxy S21 128GB</code>.<br>Når requesten er modtaget fra serveren, så vil den forstå, det at vi
+beder serveren om at tilføje et nyt produkt til butikken, i det her tilfælde. Det kunne være hvilket som 
+helst andet genstand vi tilføjer.<br>
+Men serveren vil derefter behandle disse oplysninger fra <code>POST-Request</code>, og oprette produktet i
+databasen og returnere en respons tilbage til os. Responsen det kan være oplysninger om det oprettede produkt,
+at produktet er oprettet. Det kan også være en statuskode, hvis det lykkes for serveren at oprette produktet.
+Så vil statuskoden være <code>201</code>, som betyder at det er behandlet med succes, 
+eller en statuskode på <code>400 Bad Request</code> eller <code>500 Internal Server Error</code>.<br>
+Hvis det er <code>400 Bad Request</code>, så er det fordi oplysninger er tastet forkert eller ugyldig syntaks,
+eller at der mangler oplysninger. Hvis det er <code>500 Internal Server Error</code>, så betyder det, at der
+opstod en uforventet fejl på serveren, som forhindre serveren at behandle requesten korrekt.
+<br>I respons fra serveren kan man også modtage en fejlbesked udover statuskode, hvis der var en fejl, under
+oprettelse af produktet fx.
+<br><br>Statuskoder i HTTP, det er et numerisk kodenummer, som serveren returnere til klienten, som respons 
+på en request. Det kan variere fra 100 - 599. <code>200 OK</code>, det betyder at requesten blev behandlet succesfuldt.
+<code>404 Not Found</code>, det betyder, at der er opstået en fejl på klientens side.
+<br><code>500 Internal Server Error</code>, det betyder, at der opstod en fejl på serverens side.
+<br>Disse statuskoder det er en vigtig del af HTTP-protokollen og de bruges til at kommunikere mellem klienten
+og serveren om resultatet af requests.
+<br><br>
+<pre><code>app.post("/drinks", (req, res) => {
+  const { name, price } = req.body;
+  if (!name || !price) {
+    return res.status(404).send("Name and price are required");
+  }
+  let id;
+  if (drinks.length > 0) {
+    id = drinks[drinks.length - 1].id + 1;
+  } else {
+    id = 1;
+  }
+  const newDrink = { id, name, price };
+  drinks.push(newDrink);
+  res.status(201).send(newDrink);
+});</code></pre>
+I det her eksempel, laver håndterer vi en <code>POST-Request</code> i <code>Express</code>.
+<br>Vi håndterer en POST-Request til ruten <code>/drinks</code> i Express applikationen, ved at bruge
+<code>app.post("drinks", )</code>, det betyder når der sendes POST-Request til <code>/drinks</code>, så vil 
+funktionen blive udført.
+<br>Når der sendes en POST-Request til <code>/drinks</code>, så udføres funktionen, der tager funktionen også
+<code>req (request object)</code> og <code>res (respons object)</code> som parametre. Altså i funktionen, 
+<pre><code>app.post("/drinks", (req, res) => {
+
+});</code></pre>
+Når serveren modtager en POST-Request, så ser den i <code>request body</code> efter <code>name</code> og 
+<code>price</code> på den nye drik, i det her tilfælde.
+<br>Bagefter valideres serveren, altså den tjekker om både navn og pris er inkluderet i requesten. Hvis
+ikke det er inkluderet, så sender serveren en fejlbesked tilbage til klienten, hvor beskeden indeholder
+at navn og pris skal være inkluderet også stopper behandlingen.
+Hvis det er inkluderet, så vil serveren først generer en unik <code>ID</code> til den nye drik, hvis
+der allerede er drikke i systemet, så bruger serveren det sidste <code>drinks ID</code> og 
+tilføjer 1 til det, altså det sidste <code>drink ID + 1</code>. Eller hvis der ikke er nogen <code>drinks</code>
+på serveren så er den nye drik ID 1.
+<br><br>Derefter opretter serveren et nyt <code>drink-object</code> som tilføjes til listen at drikkevarer.
+så vores database har endnu en ny <code>drink</code>, med det unikke <code>ID</code>, navn og pris.
+<br>Bagefter sender serveren svar tilbage til klienten, for at fortælle brugeren, at den nye drink er oprettet,
+og så der sendes også alle oplysninger om den nye <code>drink</code> tilbage, så de kan se, at det er behandlet
+succesfuldt.
+<br>I det her tilfælde så, hvis det er behandlet succesfult, så bliver det gemt til vores <code>array</code>,
+ellers så får klienten en fejl besked om at navn og pris skal være inkluderet også stopper behandlingen af
+POST-Request. 
 </p>
