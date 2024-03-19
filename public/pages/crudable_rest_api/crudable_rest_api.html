@@ -1,3 +1,182 @@
 <h1 id="top_header">CRUDable Rest Api</h1>
-<p>
+<p>CRUDable Rest API, det følger konventionerne for RESTful API-design, og det handler 
+  om at bruge af standard HTTP metoder <code>(GET, POST, PUT, PATCH, DELETE)</code>.
+  Altså bruge dem til at udføre handlinger på ressourcer og også bruge det til ressourcebaserede URIs
+  til at identificere ressourcer.
+  At bruge det til ressourcebaserede URIs det er i praksis, den måde man designer dem, med API-ruter 
+  baseret på ressource. Fx. skal alle endpoints være navneord i fleretal fx. <code>/books</code>
+  og hvis man skal referer til et bestemt id, så skal det gøres sådan her <code>/books/:id</code>
+  specifik, hvis man arbejder med <code>Express</code>, hvor i det her tilfælge, kunne id være fx. 5, 
+  så vil det være <code>/books/5</code>, det er en standard design for rest api.<br> Som gør det nemt at
+  finde rundt i de forskellige endpoints og identificere med en unik id,altså finde den specifikke 
+  ressource der skal bruges. Det gør det også nemmere at forstå hvordan API'en fungerer, ved at 
+  ruterne afspejler de ressourcer, der manipuleres, bruges og de handlinger, som skal udføres på dem. 
+  <br>De er repræsenteret af HTTP metoderne, som giver sig selv.<br><br>
+  <code>GET</code>, det skal vise alle ressourcerne,
+  eller vise en bestemt ressource baseret på et unik id. <code>POST</code>, det bruges til at tilføje / oprette et nyt
+  ressource baseret på et unik id. <code>PUT</code>, det bruges til at ændre / redigerer, eller opdaterer et ressource,
+  baseret på et unik id, hvor du skal sende <code>PUT-request</code>, hvor du skal inkludere alle 
+  oplysninger til ressourcen, så <code>PUT</code> opdaterer en ressource med en helt ny version af ressourcen.
+  Derimod <code>PATCH</code>, den bruges til at opdaterer en delmængde af oplysninger, det betyder at du ikke skal
+  opdateret alle oplysninger på en ressource, du kan godt bare opdateret fx. fra det originale oplysninger
+  <pre><code>{
+    "id": 1,
+    "title": "The Great Gatsby",
+    "author": "F. Scott",
+    "publishedYear": 1925,
+    "genre": "Fiction",
+    "pages": 180
+}</code></pre> og kun opdatere title og forfatteren.
+<pre><code>{
+    "title": "The Catcher in the Sky",
+    "author": "J.D. Salinger"
+}</code></pre>Hvor her behøver vi kun ændre de oplysninger vi skal ændre, hvor i en <code>PUT-request</code>,
+så skal alle oplysninger blive ændret.
+<br><code>DELETE</code>, den bruges til at fjerne et specifik ressource baseret på dens unikke id fx.
+hvis man vil slette en bog med id 5, så navigerer man ind på endpoint <code>/books/5</code>.
+  <br>Men fordi vi bruger den standard, så gør det API'et mere
+  konsistent, skalarbar, som betyder at det er lettere at tilføje nye ressourcer eller handlinger i 
+  fremtiden, ved at følge den konvention gennem hele rute-strukturen.
+  <br><br>
+  CRUD, det står for <code>CREATE, READ, UPDATE, DELETE</code>, som er de forskellige handlinger 
+  der bruges i rest api'er.
+  <pre><code>const express = require("express");
+const app = express();
+app.use(express.json());</code></pre>
+Vi starter først med at importere Express, som gør vi kan bygge vores server op. Derefter opretter vi en ny
+instans af Express kaldet for <code>app</code>, det betyder at vi initialisere express.
+Vi konfigurerer Express til at bruge den indbygget middleware <code>express.json()</code>, det gør at vi giver
+vores server lov til at parse indkommende <code>JSON-data</code> fra request, og konvertere dem til 
+<code>JavaScript objekter</code>.
+I det her REST API der bruger vi drinks som eksempel.
+<pre><code>let drinks = [
+{ id: 1, name: "Soda", price: 20 },
+{ id: 2, name: "Cola", price: 20 }
+];</code></pre>Her opretter vi en variable som vi kalder for drinks, det indeholder et array af objekter, i vores
+tilfælde 2 objekter. De 2 objekter det er 2 drinks med hver sit eget unik id, navn og pris.
+<pre><code>app.get("/drinks", (req, res) => {
+  res.send(drinks);
+});</code></pre>Her definerer vi en GET rute, ved at bruge Express, som reagerer på alle request til endpoint 
+<code>/drinks</code>. Når en klient sender en GET-Request til vores server, så sender serveren alle drikkevarere 
+tilbage til klienten i <code>JSON-format</code> som respons.
+<pre><code>app.get("/drinks/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const drink = drinks.find(drink => drink.id === id);
+
+  if (!drink) {
+    return res.status(404).send("Drink not found");
+  }
+
+  res.send(drink);
+});</code></pre> I det her eksempel, ligesom fra forrige eksempel, så definerer vi en GET rute, 
+på endpoint <code>/drinks</code>, forskellen er nu er det baseret på et unik id, så endpoint er faktisk
+<code>/drinks/:id</code>, hvor id er den unikke id, som er en variable, som er en del af endpoint, for 
+den specifikke drink man tilgå til. Det betyder når en klient sender en GET-Request, så skal det svarer til id
+på den specifikke ressource, som er drink i vores tilfælde, og da der kun er 2 drinks, så kan klienten kun tilgå
+en drink ved enten id 1 eller 2, hvis klienten request om en drink med id 3, så får han en <code>404</code> og beskeden
+Drink not found. I vores eksempel, så er id en paramter klienten vil request om, det betyder altså at de skal request om
+enten <code>/drinks/1</code> eller <code>/drinks/2</code> til at tilgå en af de drinks vi har i vores array af objekter
+fra vores server.
+<pre><code>app.post("/drinks", (req, res) => {
+  const { name, price } => req.body;
+  if (!name || !price) {
+    return res.status(404).send("Name and price are required");
+  }
+  let id;
+  if (drinks.length > 0) {
+    id = drinks[drinks.length - 1].id + 1;
+  } else {
+    id =1;
+  }
+  const newDrink = { id, name, price };
+  drinks.push(newDrink);
+  res.status(201).send(newDrink);
+});</code></pre>Vi definerer en POST rute, det gør vi tillader klienten at oprette en ny drink på vores server, ved
+at de requester en <code>POST-Request</code> og i <code>request body</code>, har de en json, hvor de sender den json-data
+med navn, pris i <code>request-body</code> til serveren. Derefter validerer, vi om både navn og pris er 
+inkluderet i requesten. Hvis de ikke er inkluderet, så sender vi en fejlstatuskode 404 og en besked 
+<code>Name and price are required</code>. Så klienten er klar over, han mangler at sende de manglende oplysninger.
+Hvis navn og pris er inkluderet, så opretter serveren en ny drik med en unik id, i vores tilfælde er den auto increment
+fra det sidste drinks id + 1, da vi har 2 drinks på vores server, hvis vi havde 0 drinks, så vil den først oprettet fra
+request blive tildelt id 1. Det betyder at hvis en klient opretter en ny drink, så vil den nye drink få tildelt 
+den unikke 3. Det nye drink vil blive tilføjet til vores array af drinks objekter. Bagefter vil vi sende den nye drink
+tilbage som respons med statuskode <code>201 (Created)</code> og også information på den nye drink.
+<pre><code>app.put("/drinks/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const drinkIndex = drinks.findIndex(drink => drink.id === id);
+  if (drinkIndex === -1) {
+    return res.status(404).send("Drink not found");
+  }
+  const { name, price } = req.body;
+  if (!name || !price) {
+    return res.status(400).send("Name and price are required");
+  }
+  drinks[drinkIndex] = { id, name, price };
+  res.send(drinks[drinkIndex]);
+});</code></pre>
+Her definerer vi en PUT rute, det tillader klienten at opdatere en af vores eksisterende ressource, i det
+her tilfælde en af vores drinks. Det gør de ved at sende en <code>PUT-Request</code> med <code>JSON-data</code>
+hvor <code>JSON-data</code> skal indeholde det nye opdateret navn og pris, på en drink, som er en del af
+<code>request-body</code> fra deres request. Klienten finder den specifikke drink, de gerne vil opdatere på
+det unikke id på den drink, så før de kan sende nogen <code>PUT-Request</code>, så skal de fx.
+request til endpoint <code>/drinks/1</code> eller <code>/drinks/2</code>, alt efter hvilken drink de vil opdatere.
+Hvis de er på endpoint <code>/drinks/3</code>, så vil de få statuskode <code>404 (Not Found)</code>,
+som betyder altså, at vi ikke har en drink med et unik id på 3, da vi kun har 2 drinks på serveren.
+Hvis klienten mangler navn og pris på en drink i request, så vil de får en statuskode <code>400 (Bad Request)</code>
+fordi de skal have en <code>JSON</code>, med de nye oplysninger, hvis de bare sender en tom <code>JSON</code> i
+<code>request-body</code>, vil serveren respons tilbage med beskeden om at der skal være navn og pris inkluderet.
+<pre><code>app.patch("/drinks/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const drinkIndex = drinks.findIndex(drink => drink.id === id);
+
+  if (drinkIndex === -1) {
+    return res.status(404).send("Drink not found");
+  }
+
+  const { name, price } = req.body;
+
+  if (!name && !price) {
+    return res.status(400).send("Name or price are required");
+  }
+
+  if (name) {
+    drinks[drinkIndex].name = name;
+  }
+
+  if (price) {
+    drinks[drinkIndex].price = price;
+  }
+
+  res.send(drinks[drinkIndex]);
+});</code></pre>Ligesom det forrige eksempel med PUT, så bruges patch også til at opdatere en specifik ressource,
+som er en drink i det her tilfælde, baseret på dens unikke id. Vi definerer en PATCH Rute på endpoint 
+<code>/drinks/:id</code>, ligesom det andre eksempler, så er <code>:id</code> den unikke id, hvor den specifikke drink,
+som klienten gerne vil opdatere.
+Når der bliver sendt en <code>PATCH-Request</code> til endpoint <code>/drinks/3</code>, så vil serveren sende
+en fejlbesked med statuskode <code>404</code>, da serveren ikke har nogen 3 drink.
+Hvis klienten request på <code>/drinks/2</code>, så skal klienten sørge for at have navn og pris, i 
+<code>JSON-data</code>, så den drink kan blive opdateret, hvis der er en tom <code>JSON</code>, så vil
+klienten for en besked og statuskode <code>400</code>, hvor serveren vil fortælle klienten at navn eller pris skal være
+inkluderet, fra beskeden. Men da det er en <code>PATCH</code>, så behøves ikke både navn og pris være opdateret.
+Det kan bare være en af dem i <code>JSON-data</code> i <code>request-body</code> inde i <code>PATCH-Request</code>.
+<pre><code>app.delete("/drinks", (req, res) => {
+  const id = req.params.id;
+  const initialLength = drinks.length;
+  drinks = drinks.filter(drink => drinks.id !== id);
+  if (drinks.length === initialLength) {
+    return res.status(404).send("Drink not found");
+  }
+  res.sendStatus(204);
+});</code></pre>Vi definerner en DELETE rute, det gør at vi tillader klienten af slette en drink fra vores serveren.
+Den drink er baseret på det unikke id, i vores tilfælde kan klienten slette vores drink med id 1 eller 2, på endpoint
+<code>/drinks/1</code> eller <code>/drinks/2</code>, klienten kan selvfølgelige også slette begge, så skal brugeren,
+bare request 2 <code>DELETE-Request</code>, til de 2 endpoints. Ligesom i de andre eksempler, hvis drink ikke findes,
+fordi klienten har request på endpoint <code>/drinks/3</code>, så vil serveren respons med statuskode <code>404</code>
+og beskeden Drink not found. Hvis det lykkes at slette ressourcen succesfuldt fra serveren, så vil klienten få en 
+statuskode <code>204 (No Content)</code> som respons, som betyder at den specifikke drink er blevet slettet succesfuldt 
+fra serveren.
+Det er de forskellige <code>HTTP methods</code>, der bruges til REST API og til at lave full <code>CRUDable REST API</code>.
+Det her eksempelt er bare med <code>array</code> af drink <code>objects</code>, det kunne være alt mulig andet, fra andre api,
+til andre slags ressource. 
 </p>
