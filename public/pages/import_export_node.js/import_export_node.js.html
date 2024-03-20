@@ -1,3 +1,40 @@
 <h1 id="top_header">Import / Export Node.JS</h1>
 <p>Der er 2 primære måder at importere og eksportere moduler i Node.js på.
+<br>Der er <code>CommonJS</code> og <code>ECMAScript</code> moduler <code>(ES-moduler)</code>,
+det er også kendt som <code>type module</code> eller <code>type=module</code>.
+<br><br>
+<code>CommonJS</code> det er kendt som den oprindelige modulstandard i <code>Node.js</code>.
+Når man arbejder med <code>CommonJS</code>, så bruger man <code>require()</code>, og det er til at importere
+moduler og man bruger <code>module.exports</code> eller <code>exports</code> objektet, hvis man skal 
+eksportere moduler.
+Her er et eksempelt.
+<pre><code>const express = require("express"); // import express in CommonJS
+
+const app = express(); // Initialize Express
+
+module.exports = app; // exports a function or object in CommonJS
+</code></pre>
+I det her eksempel, så først importere vi express ved at bruge <code>require()</code>, som er en del af
+<code>CommonJS</code> modulet. Vi tildeler det en variable som vi kalder for <code>express</code>, det
+er standard måden at gøre det på, hvis man skal arbejde med express og bruge den variable senere, så er det godt
+at gemme det i en variable.
+<br>Der efter initialiserer vi express, som vi gør ved at kalde på <code>express()</code> funktionen.
+Hvor vi opretter en ny instans af Express, hvor vi gemmer den i variablen <code>app</code>
+<br><br>
+Til sidst så eksportere vi <code>Express-appen</code>, som vi gør ved at tildele den <code>module.exports</code>,
+som gør appen tilgængelig for andre filer, hvis vi arbejde men den, så kan vi importerer denne fil i andre filer.
+<br><br>
+Hvis man arbejder med ECMAScript-moduler <code>(ES-moduler)</code>, som er den nyere standard, som er blevet tilføjet
+til Node.js.
+Så skal det gøres anderledes og håndteres anderledes end <code>CommonJS</code>.
+<br>I <code>ES-moduler</code>, der bruger man, altså <code>import</code> og <code>export</code>, til at arbejde
+hvis man skal importere og eksportere moduler. Her er et eksempel.
+<pre><code>import express from "express"; // imports Express in ES-modules
+
+const app = express(); // initialize Express
+
+export default app; // exports a function or objects in ES-modules</code></pre>
+Hvis man skal bruge ES-moduler, så skal man også sørge for at man har <code>"type": "module"</code> i ens
+<code>package.json</code> fil, ellers så kan man også bruge filtypenavne som <code>.mjs</code> til alle sine
+<code>ES-moduler</code>.
 </p>
