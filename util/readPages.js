@@ -119,3 +119,8 @@ const importExportNodejs = readPage("./public/pages/import_export_node.js/import
 export const importExportNodeJSPage = renderPage(importExportNodejs, {
   tabTitle: "Import / Export Node.JS"
 });
+
+const staticFiles = readPage("./public/pages/static_files/static_files.html");
+export const staticFilesPage = renderPage(staticFiles, {
+  tabTitle: "Static Files"
+});

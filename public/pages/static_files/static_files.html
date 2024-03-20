@@ -1,0 +1,48 @@
+<h1 id="top_header">Static Files</h1>
+<p>Man kan serverer statiske filer <code>HTML, CSS, JavaScript, images</code> direkte til klienten.
+Det gør altså, så serveren ikke skal behandle disse filer, for hver gang der bliver sendt 
+<code>request</code> til serveren. Det er en måde at reducerer belastningen på serveren og det forbedrer også
+webapplikationens ydeevne.<br>
+Det optimere også af klientens side, med andre ord, det betyder altså at klientens enhed ikke skal downloade
+de samme filer igen, hvis det allerede er gemt i deres browsercache. Det reducerer belastningen på netværket
+og det gør også at det tager kortere tid at loade og indlæse webapplikationen for brugeren.
+<br><br>
+I Express, så kan man serve static files, ved at bruge <code>app.use(express.static())</code>, og det er middleware, som
+bruges til at betjene statiske filer. Det gør fx. hvis ens server har en fil kaldet <code>style.css</code> i
+<code>public</code> mappen, så man kan tilgå den gennem klienten ved at bruge <code>URL'en</code> fx. 
+<code>/style.css</code>. Så skal man bare sørge hvor at man bruger <code>app.use(express.static("public"));</code>,
+som betyder at, man fortæller Express, at alle statiske filer fra mappen <code>public</code> skal betjenes, som gør
+at alle filer i <code>public</code> mappen kan tilgås direkte fra klienten gennem deres <code>URL'er</code>.
+Her et et eksempel.
+<pre><code>const express = require("express");
+const app = express();
+
+app.use(express.static("public"));
+</code></pre>
+I det her eksempel, der importere vi express og gemmer det i variablen <code>express</code>, og så initialiserer vi
+express og gemmer det i variablen <code>app</code>. Derefter bruger vi <code>express.static()</code>, som er en
+middleware til at betjene statiske filer, som er i mappen <code>public</code> i vores eksempel, 
+da har specificeret det i <code>app.use(express.static("public"));</code>.
+<br><br>
+Ved at betjene statiske filer fra en bestemt mappe, så gør vi det nemmere og forenkler processen med at udvikle 
+webapplikationer, det gør det også nemmere at betjene HTML-sider, billeder, css og javscript filer altså uden
+yderligere konfiguration, fordi der er god struktur og standard over hvor filerne er.
+<br><br>
+Man betjener også statiske filer og bruger middleware til at betjene fra en bestemt mappe, det er også fordi, man
+undgår at hardkode absolutte paths til alle filerne i koden. Det gør koden både mere sikkert og mindre sårbar over
+for angreb som fx. path-manipulation eller andre sikkerhedstrusler.
+<br>Her er et eksempelt, uden hardkode paths.
+<pre><code>app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/homepage/homepage.html");
+});
+
+app.get("/publicSquare", (req, res) => {
+  res.sendFile(__dirname + "/public/publicSquare/publicSquare.html");
+});</code></pre>
+I det her eksempel, der bruger vi <code>__dirname</code> og relative paths i <code>res.sendFile()</code>, på den måde
+undgår vi, alt vi bruger absolutte paths, som er hardkode i koden, som gør det både mere sikkert mod angreb.
+<br><code>__dirname</code> det er en global variable i node.js, og ved at bruge den, så kan man få den aktuelle
+mappe man arbejder i for den kørende javascript-fil. Det gør så man bare kan bruge relative path, da 
+<code>__dirname</code> indeholder paths i mappen, så man kun skal specificere den sidste del af path, som er
+den relative path.
+</p>
