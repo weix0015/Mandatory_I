@@ -130,3 +130,9 @@ export const structureFrontendPage = renderPage(structureFrontend, {
   tabTitle: "Structure Frontend",
   CSSLink: '<link rel="stylesheet" href="/pages/structure_frontend/structure_frontend.css">'
 });
+
+// all pages to 08-03/2024
+const redirections = readPage("./public/pages/redirections/redirections.html");
+export const redirectionsPage = renderPage(redirections, {
+  tabTitle: "Redirections"
+});
