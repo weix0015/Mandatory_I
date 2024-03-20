@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { importExportHtmlPage, importExportNodeJSPage, 
-  staticFilesPage } from "../util/readPages.js";
+  staticFilesPage, structureFrontendPage } from "../util/readPages.js";
 
 const router = Router();
 
@@ -14,6 +14,10 @@ router.get("/importExportNodejs", (req, res) => {
 
 router.get("/staticFiles", (req, res) => {
   res.send(staticFilesPage);
+});
+
+router.get("/structureFrontends", (req, res) => {
+  res.send(structureFrontendPage);
 });
 
 export default router;

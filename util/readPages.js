@@ -124,3 +124,9 @@ const staticFiles = readPage("./public/pages/static_files/static_files.html");
 export const staticFilesPage = renderPage(staticFiles, {
   tabTitle: "Static Files"
 });
+
+const structureFrontend = readPage("./public/pages/structure_frontend/structure_frontend.html");
+export const structureFrontendPage = renderPage(structureFrontend, {
+  tabTitle: "Structure Frontend",
+  CSSLink: '<link rel="stylesheet" href="/pages/structure_frontend/structure_frontend.css">'
+});

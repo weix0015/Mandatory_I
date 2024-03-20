@@ -1,0 +1,183 @@
+<h1 id="top_header">Structure Frontend</h1>
+<p>Når man arbejder med webapplikationer, så er det vigtig at man har en god struktur til alle sine filer, hvor man
+har frontend mapper og filerne, i de paths hvor det giver mening. Når man arbejder med <code>Express</code> og 
+<code>Node.js</code>, så vil skal man have en mappe, der hedder <code>public</code>, hvor der inde, har man mapper, 
+til alle sine <code>HTML-sider</code>, globale, css, javascript, og billeder. Så det vil være en god struktur.
+<ul class="outer">
+  <li>public
+    <ul>
+      <li>assets
+        <ul>
+          <li>css
+            <ul>
+              <li>main.css</li>
+            </ul>
+          </li>
+          <li>js
+            <ul>
+              <li>main.js</li>
+            </ul>
+          </li>
+          <li>images
+            <ul>
+              <li>logo.png</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>pages
+        <ul>
+          <li>homepage</li>
+          <ul>homepage.html</ul>
+          <ul>homepage.css</ul>
+          <ul>homepage.js</ul>
+          <li>date</li>
+          <ul>date.html</ul>
+          <ul>date.css</ul>
+          <ul>date.js</ul>
+          <li>datatypes</li>
+          <ul>datatypes.html</ul>
+          <ul>datatypes.css</ul>
+          <ul>datatypes.js</ul>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+I det her eksempelt, så man se strukturen, at <code>public</code> mapper indeholder alle de andre mapper og filer, som er 
+strukturet godt. Hvor alt inde i <code>assets</code> mappe er indelt i <code>css</code>, <code>js</code> 
+og <code>images</code> mappe, hvor de er de globale filer og ressourcer, som de forskellige <code>HTML-sider</code>
+kan tilgå.<br>Udover det, så har vi også en <code>pages</code> mappe, som er den mappe hvor alle vores sider skal være
+inden under. Der har vi mapper til hver en <code>HTML-side</code>, vi har <code>homepage</code>, <code>date</code>
+og <code>datatypes</code> mappe, hvor inden i de mapper er der de forskellige <code>HTML-filer</code> og 
+<code>css-filer</code>, som kun tilhøre den specifikke side.
+<br>Grunden til det er vigtig og godt at have en god mappe struktur til frontend <code>(assets, pages)</code>,
+der er fordi at det gør alting lettere at organisere, vedligeholde, udvide og arbejde med i fremtid. Fordi alle filer
+har en god standard struktur over hvor de forskellige filer skal være. Det gør det også lettere at finde både for en selv
+men også hvis man er i et udvikler hold og skal samarbejde, som giver en klar opdeling af ansvar og arbejdsområder.
+<br>Det gør det også mere effektivt at finde fejl og optimere koden, fordi det reducerer kompleksiteten, og det gør 
+det også mere isoleret, som gør at hvis der er fejl, så er det mere præcis hvor man skal lede og rette.
+Fx. hvis der er noget galt med en side, så er det altid, i <code>pages</code> mappen, og under den, så er det den
+specfikke mappe, som kun har alt det er hører sammen med den specifikke side.
+<br><br>
+Man vik også strukturer <code>HTML</code>, altså dele det om i segmenter, hvor man har <code>&lt;header&gt;</code>,
+<code>&lt;main&gt;</code> og <code>&lt;footer&gt;</code> indelt i de forskellige segmenter, så der også er en god
+struktur i selve <code>HTML-dokumenter</code>.<br>Her er et eksempel.
+<pre><code>&lt;header id=&quot;top_header&quot;&gt;
+  &lt;h1&gt;Home&lt;/h1&gt;
+  &lt;nav&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;/about&quot;&gt;About Us&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;/contact&quot;&gt;Contact&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;header&gt;
+
+&lt;main id=&quot;main&quot;&gt;
+  &lt;article&gt;
+    &lt;h2&gt;Welcome to Code&lt;/h2&gt;
+    &lt;p&gt;Here can you read all about our company and services, we provide.&lt;/p&gt;
+  &lt;article&gt;
+&lt;main&gt;
+
+&lt;footer id=&quot;bottom_footer&quot;&gt;
+  &lt;p&gt;&copy; 2024 Code. All rights reserved&lt;/p&gt;
+&lt;footer&gt;
+</code></pre>
+I det her eksempelt, så kan du se, alt <code>HTML-siden</code>, den er delt op i segmenter: 
+<code>&lt;header&gt;</code>, <code>&lt;main&gt;</code> og <code>&lt;footer&gt;</code>.
+Man vil altid bruge <code>&lt;header&gt;</code> oppe i toppen, fordi det er toppen, på alle sider,
+det gør alle sider er konsistens med samme <code>&lt;header&gt;</code>, det vil typisk være, overskrift, logo, 
+billeder eller andre elementer.
+<code>&lt;main&gt;</code>, det vil altid være under <code>&lt;header&gt;</code>, så det er indholdet på siden i 
+midten af siden, hvor <code>&lt;footer&gt;</code>, det vil altid være bunden af siden, som er for det meste,
+kontakt oplysninger, copyright-information, links og andre oplysninger.
+Man vil altid strukturere det på den både, og det er fordi, i frontend strukturen, har vi mapper i 
+<code>assets</code> som indeholder under mapper til vores frontend, hvor i det her tilfælge, man kan link
+alt globale <code>main.css</code> sammen med alle <code>HTML-siderne</code>, det gør vi kan genbruge,
+<code>main.css</code> inde i <code>/assets/css</code> mappen, til alle siderne, og det samme med
+<code>main.js</code> inde i <code>/assets/js</code>, hvis vi har javascript kode, og css, som referer
+til vores id eller klasser, så man have den struktur helle vejen igen, så man ikke får duplikeret kode.
+Det er både lettere at navigere rundt og videreudvikle på. Det gør det også mere læsbar for udvikler.
+Det gør også man skal bruge mindre filer og gør ens webapplikationer mindre tunge.
+<br><br>
+Fetching in the client, det er når vi bruger <code>javascript</code> kode til at sende request direkte fra
+brugerens browser. Det kan være nyttigt at bruge, hvis man skal hente data fra en ekstern API eller fra en
+anden server, hvor man ikke genindlæser hele siden.
+<br>Fetching in the backend, det betyder at ens egen server sender request til eksterne ressourcer på vegne
+af klienten. Det er hvis man skal bruge data fra en ekstern kilde, inden det sendes tilbage til klienten.
+Eksempelt på det.
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Fetching in the Client&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button id=&quot;fetchButton&quot;&gt;Fetch Data&lt;/button&gt;
+
+    &lt;script&gt;
+    document.getElementById("fetchButton").addEventListener("click", async () => {
+      try {
+        const response = await fetch("/backend-data");
+        if (!response.ok) {
+          throw new Error("Fetching data failed");
+        }
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    });
+</code></pre>
+I det her eksempel, så når brugeren klikker på knappen, som har id <code>fetchButton</code>, så vil der udløses et
+fetch request til <code>/backend-data</code>, i det her tilfælde er det en <code>GET-Request</code> til vores 
+serveren, det betyder altså vi fetcher fra klienten til vores backend server,
+hvis det lykkes med succes, så når respons er modtaget, så vil det blive udskrevet i konsolen.
+Hvis det fejler, så vil vi få en fejl besked ud i klienten, udskrevet i konsolen.
+<pre><code>app.get("/external-data", (req, res) => {
+  try {
+    fetch("https://api.example.com/data")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Fetching data failed");
+        }
+        return response.json();
+      })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(error => {
+        console.error("Error:"", error.message);
+        res.status(500).send({ error: "Internal Server Error" });
+      });
+  } catch (error) {
+    console.error("Error:", error.message);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+});
+  
+const PORT = 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});</code></pre>
+I det her eksempel, der bruger vi <code>node-fetch</code> modulet, for at få adgang til <code>fetch</code> funktionen.
+Det betyder at man først skal installerer <code>node-fetch</code> før man kan bruge det, men andre ord, man skal
+først <code>npm install node-fetch</code> for at kunne bruge det.
+Hvor vi <code>fetch</code> fra <code>API'et</code> <code>https://api.example.com/data</code>, og håndterer det
+hvis vi får en fejl, eller så får vi data fra json konverteret til javascript objekter, når vi modtager respons
+fra <code>API'et</code> hvis vores <code>fetch request</code>, som er en <code>GET-Request</code> succesfuldt henter
+dataen.
+<br><br>
+Forskellen mellem fetching in client og backend, det er at fetching in client det en request, der sendes fra 
+klientens webbrowser, som er javascript der fetch request til et andet <code>API</code> eller server.
+Når der er respons fra <code>API</code> eller serveren, så er det synligt for brugeren.
+<br>Det anvendes typisk til interaktivitet i brugergrænsefladen, som fx. opdatering af indhold uden at genindlæse
+helle siden.<br>
+Fetching in backend, det er når ens egen server sender request til en anden server eller <code>API</code>.
+Der bruges typisk et library som <code>Express</code> i <code>Node.js</code> til at håndtere requests.
+Requesten vil blive håndteret af serveren og respons vil blive sendt tilbage til serveren.
+Hvor det typisk bruges til at hente data fra databaser.
+</p>
