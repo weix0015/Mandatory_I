@@ -1,3 +1,83 @@
 <h1 id="top_header">Import / Export HTML</h1>
-<p>
+<p>I HTML kan man import og export, og det er når man bruger JavaScript moduler.
+  <br><code>&lt;script type=&quot;module&quot;&gt;&lt;/script&gt;</code>, det er i script tag.
+  Det betyder, altså når vi importerer et JavaScript modul i HTML, så bruger vi
+  <code>&lt;script type=&quot;module&quot;&gt;&lt;/script&gt;</code>.
+  Her fortæller vi browseren, at det javascript det er et javascript modul, det tillader os at dele
+  vores javascript kode op i separate filer. Det gør det lettere at håndtere og vedligeholde vores kode.
+  <br>Det gør også vi kan genbruge funktioner, variable og objekter.
+  Her er eksempler på at dele det op i separate javascript filer.
+  <pre><code>// addition.js
+export function add(a, b) {
+  return a + b;
+}</code></pre>
+<pre><code>// subtraction.js
+export function subtract(a, b) {
+  return a - b;
+}</code></pre>
+Her har vi 2 separate javascript filer, som vi kan genbruge i en anden fil.
+<pre><code>// app.js
+import { add } from "./addition.js";
+import { subtract } from "./subtraction.js";
+
+console.log(add(5, 3)); // Output: 8
+console.log(subtract(10, 4)); // Output: 6</code></pre>
+
+her i eksemplet kan vi forbinde app.js module i vores html fil.
+<code>&lt;script src=&quot;app.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;</code>
+så har vi også isolation, så hvis vi ændre fx. <code>addition.js</code>, så vil det ikke 
+påvirke de andre javascript filer.
+Det er også skalarbart, da vi kan tilføje nye funktionaliteter eller fjerne funktionaliteter ved at tilføje moduler
+efter behov. Det gør også vi undgår at have mange script tag, i en html fil.
+<br><br>
+Export i javascript, der kan vi gøre funktioner, variabler eller objekter tilgængelig for andre moduler eller filer.
+Hvor vi kan genbruge kode og holde det afskilt fra hinanden.
+<br>Der er 2 hovedtyper af export, der er named exports, hvor vi specificerer, hvilke funktioner, variabler eller
+objekter vi gerne vil exportere, hvor vi bruger <code>export</code> keyword før funktion eller før variablen / objektet.
+<br>Her er et eksempelt.
+<pre><code>export function greet(name) {
+  return "Hello, " + name + "!";
+}
+
+export const message = "Welcome here!"</code></pre>
+I dette eksempelt, så gør vi andre filer og moduler har adgang til vores <code>greet function</code> og 
+<code>message variable</code>. 
+Der findes også <code>Default export</code>, når vi export default fra et modul som standard, så når en anden fil 
+importere, det så kan de kalde instansen hvilket som helst andet navn, som de har behov for, i stedet for at bruge
+det samme navn. <br>For eksempel
+<pre><code>export default function greet(name) {
+  return "Hello, " + name + "!";
+}
+
+export default class User {
+  constructor(name) {
+    this.name = name;
+  }  
+}</code></pre>
+Så hvis de skal bruge de funktioner og variable eller objekter, fra en anden fil, et andet <code>JavaScript-modul</code>,
+så skal de importeres, det gør vi ved at bruge <code>import</code> keyword. Hvor vi angiver hvilken path den fil ligger i
+og specificerer de elementer, som vi gerne vil importere inde i <code>{ }</code>.
+<br>Det er et eksempelt, hvis vi skal importere named exports
+<pre><code>import { greet } from "./greeting.js";
+import { message } from "./messages.js"</code></pre>
+Her importere vi funktionen <code>greet</code> fra filen <code>greeting.js</code> og variablen <code>messsage</code>
+fra filen <code>message.js</code>.
+<br>Hvis vi gerne vil importere default import, som er blevet eksporteret som standard fra et modul.
+<pre><code>import greet from "./greeting.js";
+
+import User from "./User.js";</code></pre>
+Man kan også importere og give det et alias, altså give funktioner, variabler eller objekter et andet navn.
+<pre><code>import { greet as sayHello } from "./greeting.js";</code></pre>
+Forskellen mellem <code>default export</code> og <code>export</code>, det er at, hvis man bruger 
+<code>default export</code>, så man kan kun eksportere en ting fra et modul som standard. Det betyder altså, når du
+importerer en <code>default export</code> i et andet modul, så kan du give det hvilket som helst navn, og det 
+vil også sige, at hvis du bruger <code>export default</code>, så kan du kun eksportere en <code>default export</code>,
+som betyder kun 1 funktioner, eller variable, klasse eller objekt kan blive eksporteret som standard fra en fil.
+<br>Du kan selvfølgelig have 1 <code>default export</code> og en <code>named export</code>, så du både kan 
+importere det, hvis man skal bruge begge dele.
+<br>
+I named export, så kan man eksportere flere funktioner, variabler eller objekter fra et modul.
+Hvis du importerer <code>named exports</code> i et andet modul, så skal du bruge de præcise navne, 
+som de blev <code>export</code> med.
+I named export så skal man også bruge <code>{ }</code>, hvor man angiver hvilke elementer man vil importere i filen.
 </p>
