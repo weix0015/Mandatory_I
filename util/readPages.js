@@ -142,3 +142,19 @@ const ssrVsCsr = readPage("./public/pages/ssr_vs_csr/ssr_vs_csr.html");
 export const ssrVsCsrPage = renderPage(ssrVsCsr, {
   tabTitle: "SSR VS CSR"
 });
+
+// all pages to 15-03/2024
+const linter = readPage("./public/pages/linter/linter.html");
+export const linterPage = renderPage(linter, {
+  tabTitle: "Linter"
+});
+
+const promises = readPage("./public/pages/promises/promises.html");
+export const promisesPage = renderPage(promises, {
+  tabTitle: "Promises"
+});
+
+const routers = readPage("./public/pages/routers/routers.html");
+export const routersPage = renderPage(routers, {
+  tabTitle: "Routers"
+});
