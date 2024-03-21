@@ -1,3 +1,65 @@
 <h1 id="top_header">Routers</h1>
-<p>
+<p>I Express, så bruger man routers, og det er en måde at organisere dine routers og endpoints på.
+Det gør også koden bliver mere strukturet og lettere at vedligeholde. Man har en routers mappe, hvor der inde
+har man forskellige routers, altså <code>javascript</code> filer, som er de forskellige routers. Hvor navnet
+angivet til den route, det er så man har grupper af routes, der hører sammen, og så kan man håndtere dem i
+separate filer. fx. man kan have en route til alle sine bøger og en anden til alle billeder, så har men den
+adskilt, i stedet for man har en helt masse kode og funktioner i <code>app.js</code>, så deler man det op i 
+forskellige routes, som gør det mere strukturet.<br>Her er et eksempel på det.
+<pre><code>import express from "express";
+const app = express();
+
+app.use(express.static("public"));
+
+import homeRouter from "./routers/home.js";
+
+app.use(homeRouter);
+
+const PORT = 8080;
+app.listen(PORT, () => console.log("Server is running on port ", PORT));</code></pre>
+I det her eksempel, så i <code>app.js</code>, der opretter jeg en express applikation, hvor jeg først importere
+<code>Express</code> og initialisere den efter med <code>express()</code> og gemmer den i variablen <code>app</code>.
+Så konfigurer jeg derefter <code>Express</code> til at servere statiske filer fra <code>public</code> mappen,
+ved altså at bruge <code>express.static()</code>, som er en indbygget middleware, som jeg bruger til at server,
+alle mine <code>HTML-sider</code>, da de ligger i forskellige mapper under <code>public</code> mappen.
+<br>Så importerer jeg <code>homeRouter</code> fra min <code>./routers/home.js</code>, og bruger 
+<code>app.use()</code> metoden, det er for at fortælle <code>Express</code>, at den skal bruge denne router til
+håndtering af alle routes relateret til homeRouter, altså så den håndterer alle routers fra min 
+<code>homeRouter.js</code> fil, som har de forskellige routes der relateret til home. Så starter jeg serveren
+ved at fortælle <code>Express</code> at den skal lytte på port <code>8080</code>.
+<pre><code>import { Router } from "express";
+import { homepagePage } from "../util/readPages.js";
+
+const router = Router();
+
+router.get("/", (req, res) => {
+  res.send(homepagePage);
+});
+
+export default router;</code></pre>
+I eksemplet her, i <code>home.js</code> under mappen <code>routers</code>, der opretter man en ny <code>router</code>,
+og det gøres ved at importere <code>Router</code> fra <code>Express</code>, og jeg importere også 
+<code>homepagePage</code> fra <code>../util/readPages.js</code>, det er fordi jeg har <code>Server Side Rendering</code>
+hvor alle mine <code>HTML-sider</code> er 2 globale <code>HTML</code> filer, som bliver brugt til at genere skabelon
+for alle mine <code>HTML</code> sider, fra serveren, når serveren starter. Med andre ord, det er en 
+<code>Template Engine</code> og det er serveren der indlæser alle <code>HTML-siderne</code>, når serveren starter.
+Herefter så initialisere jeg <code>router</code> ved at bruge <code>Router()</code>, og gemmer den i variablen 
+<code>router</code> i <code>javascript</code> filen <code>home.js</code>, under mappen <code>routers</code>.
+Derefter definere jeg route ved at bruge <code>router.get()</code> metoden, som betyder at, jeg har en route,
+og det er en <code>Get-Request</code>, hvor jeg har valgt <code>path</code> <code>/</code>, altså i det her eksempel,
+<code>http://localhost:8080</code>. Inde i metoden <code>router.get()</code>, der er der en 
+<code>callback-funktion</code>, som sender <code>homepagePage</code>, som respons, med andre ord, når en klient
+går på den side / endpoint, så får de forsiden altså af hjemmesiden kaldet for home tilbage som respons.
+Kort sagt, det får, det som svarer til <code>index.html</code>, men jeg har valgt at kalde det for <code>home</code>
+i stedet for <code>index</code>.<br>
+Og til sidst eksporterer jeg routeren, det gør at jeg kan importere den i andre filer og bruge den, og i det her eksempelt,
+der eksporterer jeg den, så jeg kan bruge den i <code>app.js</code>, hvor jeg importere den for at bruge den.
+Det her eksempel, det er en måde at organisere koden og håndtere forskellige endpoints i 
+<code>node.js</code>-applikationen på i ved at bruge <code>Express Routers</code>.
+<br>Udover det er en god måde at organisere koden på, så er det også godt at bruge routers, fordi man kan genbruge
+kode, altså man kan tilføje flere <code>routes</code> i en router, og da den er <code>default export</code>, og importeret
+i <code>app.js</code>, så skal man kun tilføje det i <code>home.js</code>, eller den specifikke router man vil arbejde med
+og bruge. Det gør også man ikke har en kæmpe stor <code>app.js</code>, men delt det op i mange forskellige route 
+<code>javascript</code> filer. Fx. man kan have en router til alle endpoints og sider til bøger og en anden kun til
+billeder eller andre grupper af sider. 
 </p>
