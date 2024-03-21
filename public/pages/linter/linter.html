@@ -1,3 +1,73 @@
 <h1 id="top_header">Linter</h1>
+<p>Der findes forskellige linter, som fx. <code>ESLint</code> eller <code>JSHint</code>, som
+man kan bruge til <code>JavaScript-kode</code>, hvor man kan definerer regler og konfigurationer, som
+beskriver, hvordan din kode se ud.
+<br>Derudover så er linting processen med at køre en statisk kodeanalyse på ens kodebase for at identificere
+syntax fejl, stilfejl og andre mulige fejl i koden. Det er ikke et krav at bruge en linter, men det anbefales
+stærkt, fordi det hjælper med at opretholde en høj standard for kodekvalitet og konsistens i hele projektet.
+<br>Det er også et krav at have clean code, så en linter er en god måde at sørge for at have gode standarder
+og konsistens i hele projektet, som også er en del af clean code.
+<h3>ESLint</h3>
+For at installerer <code>ESLint</code>, så skal man først åbne en terminal, i root folder, af ens <code>Node.js</code>
+projekt. Så i terminalen, skal man bruge kommandoen <code>npm install eslint --save-dev</code>, så har man installeret
+<code>ESLint</code>, som et dependency.
+<br>Efter det er installeret, så skal man sætte <code>ESLint</code> op, det gør man ved at køre kommandoen 
+<code>npx eslint --init</code>, efter man har kørt den kommando, så får man en vejledningen for at konfigurere
+<code>ESLint</code> i sit projekt. I vejledningen, så bliver man spurgt om, at vælge indstillinger, som fx. hvilken
+stilguide, man ønsker at bruge og hvilke filer man vil inkludere i linting processen. Vejledningen, det er i terminalen
+hvor man kan vælge hvad end der passer bedst og der er behov for.
+<br>Der findes også en <code>ESLint-plugin</code>, som man kan installerer, hvis man vil have realtime feedback i ens
+code editor. Det er valgfrit, om man vil bruge det.
+Efter <code>ESLint</code> er sat op i ens projekt, så skal man køre <code>ESLint</code>, man kører <code>ESLint</code>
+med kommandoen <code>npx eslint .</code> og den skal køres i root mappen af ens projekt, bagefter <code>ESLint</code> 
+er kørt så vil den analysere ens kodebase i projektet. Efter den har kørt og analyseret alle ens 
+<code>JavaScript-filer</code> i ens projekt, så vil den rapportere eventuelle fundne fejl eller advarsler 
+i terminalen som output. Det fortrækkes at man har sat det op i starten af ens projekt, så man ikke skal rette 
+en helt masse fejl eller advarsler, fordi det kan være at hvis man ændre i stil eller syntax, for at åbne en standard,
+at projektet / koden ikke vil virke og at man skal debugger i lang tid for at fikse det.
+<br><br>Man kan også få <code>ESLint</code>, til automatisk at rette visse typer fejl og advarsler i ens projekt.
+Man skal bruge kommandoen <code>npx eslint . --fix</code>, så vil <code>ESLint</code> rette advarsler og fejl.
+Kommandoen <code>npx eslint . --fix</code>, den vil dog ikke rette alle typer af fejl, men det er en nyttig
+funktion, som man kan bruge til at håndtere visse typer fejl og advarsler automatisk.
+<br><br>Man kan altid tilpasse <code>ESLint</code> i sit projekt, man skal bare konfigurere det, som man gør
+ved at redigere i filen <code>.eslintrc.json</code>, og det er den fil der bliver oprettet under konfigurationsprocessen.
+Med andre ord, det er den proces, hvor man kørte kommandoen <code>npx eslint --init</code> og gik igennem
+vejledningen.
+<br><br>Vejledningen, den består af forskellige ting man vil blive spurgt om i terminalen.
+Man vil blive spurgt først om, man vil bruge <code>json</code>, <code>javascript</code> eller <code>yaml</code>, 
+som er format til konfigurationsformat. I næste trin, så bliver man spurgt om hvilken stilguide, hvor 
+der er forskellige stilguide man kan vælge, man kan også vælge <code>ingen stilguide</code>, hvis man selv vil
+konfigurere reglerne senere.
+Hvis man har valgt en foruddefineret stilguide, så vi man blive bedt om i næste trin, at installere de
+nødvendige <code>dependencies</code> for den stilguide. Disse <code>dependencies</code> indeholder, for det meste
+regelsæt og konfigurationer, som er nødvendige for at bruge den specifikke stilguide man har valgt.
+Bagefter bliver man også spurgt om hvilke filer man vil inkludere i <code>linting</code> processen,
+hvor man kan vælge alt fra <code>JavaScript</code> kode eller specifikke mapper eller kun nogle bestemte filer.
+Efter det, så bliver man spurgt om extra konfigurationer, og det er om man bruger <code>ECMAScript-moduler</code>,
+<code>TypeScript</code> eller andre integrationer man har brugt, som fx. <code>libraries</code> eller 
+<code>framework</code> eller begge dele.
+</p>
+<img id="eslint_image" src="/assets/images/eslint.png" alt="eslint">
 <p>
+<h2>Clean Code</h2>
+Det er når man skriver kode, så skal det være let at læse, forstå og vedligeholde. Det gør man ved at følge
+bedste praktiske for kodestruktur, navngivning, kommentering og formatering. Det at skrive ren kode, gør alt
+lettere for andre udvikle, at forstå videreudvikle og gør det nemt at læse.<br>Det er også med til at
+reducerer sandsynligheden for fejl og det gør det også nemmere at finde fejl og rette fejl, hvis det opstår.
+Det gør det også nemmere at navigerer rundt i koden og filerne, når man arbejde sammen med flere udvikler eller
+i flere hold.
+<h2>Debugging</h2>
+Debugging det er en proces med at identificere, isolere og løse fejl i koden. Hvis der der fejl, så vil du bruge 
+debugging værktøjer og teknikker til at undersøge, hvor, hvordan fejl opstår og hvorfor den opstår. Det er alt fra
+at bruge værktøjer der er indbygget i code editors, til logs, output, printe værdier ud, breakpoints og andre værktøjer
+som fx. inspect element i en browser hvis man arbejder med <code>node.js</code> og <code>javascript</code>.
+Det er måder til at spore og identificere, for at forstå hvorfor fejlen opstår og hvor den starter. Debugging det er
+altid nødvendigt for at løse komplekse problemer, som opstår under udviklingen.<br>
+Her er et eksempelt, hvor der bruges breakpoints.
+</p>
+<p>
+<img id="debug_image" src="/assets/images/debug.png" alt="debug">
+</p>
+<p>I det her eksempel foroven, der bruges der breakpoints, til at teste små bider af koden, hvad der sker 
+for hver kode linje.
 </p>

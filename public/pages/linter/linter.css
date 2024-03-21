@@ -1,0 +1,19 @@
+#eslint_image, #debug_image {
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+#eslint_image {
+  max-width: 75%;
+  margin-left: 11%;
+}
+
+#debug_image {
+  max-width: 100%;
+}
+
+#eslint_image:hover {
+  transform: scale(1.1);
+}

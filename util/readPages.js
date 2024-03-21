@@ -146,7 +146,9 @@ export const ssrVsCsrPage = renderPage(ssrVsCsr, {
 // all pages to 15-03/2024
 const linter = readPage("./public/pages/linter/linter.html");
 export const linterPage = renderPage(linter, {
-  tabTitle: "Linter"
+  tabTitle: "Linter",
+  CSSLink: '<link rel="stylesheet" href="/pages/linter/linter.css">',
+  JavascriptScript: '<script src="/pages/linter/linter.js"></script>'
 });
 
 const promises = readPage("./public/pages/promises/promises.html");
