@@ -134,5 +134,6 @@ export const structureFrontendPage = renderPage(structureFrontend, {
 // all pages to 08-03/2024
 const redirections = readPage("./public/pages/redirections/redirections.html");
 export const redirectionsPage = renderPage(redirections, {
-  tabTitle: "Redirections"
+  tabTitle: "Redirections",
+  CSSLink: '<link rel="stylesheet" href="/pages/redirections/redirections.css">'
 });

@@ -1,3 +1,93 @@
 <h1 id="top_header">Redirections</h1>
-<p>
+<p>Client-side redirection, det er noget som sker kun på klientens webbrowser. Det vil man bruge
+hvis man skal omdirigere brugeren efter en handling, som er udført at klienten, hvor det er javascript
+kode eller respons på en brugerinteraktion, det kan være ting som at klikke på et link eller udfylde
+en formular. Man kan omdirigere brugeren ved at bruge <code>&lt;a href=&quot;/page&quot;&gt;</code>,
+der findes også andre måder at gøre det på som fx. ved hjælp af <code>window.location</code>,
+<code>window.location.href</code> eller <code>window.location.replace</code>.
+<code>window.location</code> og <code>window.location.href</code> de vil omdirigere brugerens
+klient til en nye side, og brugeren kan altid vende tilbage til den forrige side med deres
+browser historik. Hvis der bruges <code>window.location.replace</code>, så kan brugeren
+ikke vende tilbage til den forrige side, da <code>window.location.replace</code> erstatter den
+nuværende side, altså den nuværende url i browser historik med den nye side.
+<br><br>
+Server-side redirection, det er i backend på serverniveauet, og det betyder, at det er
+før respons sendes tilbage til klienten. Det er ofte brugt i situationer, hvor man vil
+omdirigere brugeren, og det sker i backend. Det udføres ved at returnere en <code>HTTP-statuskode</code>
+sammen med en <code>Location</code> header, og det er til at angive den nye <code>URL</code>, som klienten
+skal omdirigeres til.<br>Server-side redirections, det er hurtigere end Client-side redirections, på grund
+af, at det bliver udført før respons sendes tilbage til klienten, derimod Client-side redirections, det 
+vil først udføres, når klienten har modtaget respons og begyndt at behandle indholdet af den oprindelig side.
+Med andre ord, Server-side redirections, det sker altså tidligere i processen end Client-side redirections,
+så Server-side redirections vil resultere i en hurtigere oplevelse for brugeren.
+<br>Ved at bruge Server-side redirections, så behøver serveren kun at sende en enkelt <code>HTTP-statuskode</code>
+og en <code>Location</code> header til klienten, som er en lille datamængde. Derimod, hvis det bar Client-side
+redirections, så skal klienten først modtage og indlæse den oprindelig side, før koden i <code>JavaScript</code>
+der bliver brugt til omdirigering kan udføres, og det vil føre til større mængde data, som skal blive overført
+mellem serveren og klienten.
+Eksempler på Client-side Redirections.
+<pre><code>&lt;a href=&quot;/contact&quot;&gt;Contact Us&lt;/a&gt;</code></pre>
+Det er et eksempelt, hvor man kan bruge et <code>&lt;a&gt;</code> tag med <code>href</code> attributen, for
+at specificerer, hvor hen man vil omdirigere brugeren til.
+<pre><code>&lt;form action=&quot;/contact&quot; method=&quot;get&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Contact Us&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+Det er et andet eksempelt, hvor man kan bruge <code>HTML-formular</code> med en knap, så når brugeren trykker
+på submit knappen, så vil brugerens klient blive omdirigeret hen til <code>contact</code> siden.
+<pre><code>const express = require("express");
+const app = express();
+
+app.get("/redirect", (req, res) => {
+  res.send('&lt;script&gt;window.location.href = &quot;/contact;&quot;&lt;/script&gt;');
+});
+
+app.get("/contact", (req, res) => {
+  res.send('&lt;h1&gt;This is contact page&lt;/h1&gt;');
+});
+
+const PORT = 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});</code></pre>
+Det er et andet eksempel, hvor man kan gøre det på ens serveren i backend, hvor, når brugeren på siden
+trykker på et logo, det kunne være fx. logoet på siden, som vil omdirigere brugeren til til contact siden.
+Så bliver vores <code>rute</code> kaldt, som er en <code>GET-Request</code>, som vil sende et 
+<code>&lt;script&gt;</code> tag med <code>window.location.href = &quot;/contact;&quot;</code>, som vil derefter
+omdirigere brugerens klient hen til contact siden. Inde på contact siden, der har vores server så, en anden
+<code>Rute</code>, til at behandle <code>GET-Request</code> til contact siden, som vil vise brugeren indholdet på
+siden.<br><br>
+Eksempler på Server-side Redirections.
+<pre><code>app.get("/contactForm", (req, res) => {
+  res.redirect("/contact");
+});</code></pre>
+Det er et eksempel, hvor der bruges Server-side Redirections, hvor i <code>Express</code> der er en metode
+<code>res.redirect()</code>, det den gør at den sender en redirect <code>HTTP-statuskode</code> og en
+<code>Location</code> header med den nye <code>URL</code>, med andre ord, brugeren bliver omdirigeret til
+<code>contact</code> siden, når vores <code>Rute GET-Request</code> bliver kaldt.
+<pre><code>app.get("/contactForm", (req, res) => {
+  res.status(302).setHeader("Location", "/contact").end();
+});</code></pre>
+Det er en anden måde at gøre det på, i det her eksempelt, der opsætter vi manuelt <code>HTTP-statuskode</code>
+og <code>Location</code> headeren. I eksempelt, bruger vi også <code>HTTP-statuskode 302</code>, og <code>302</code>
+det er brugt til at angive, ressourcen er midlertidligt flyttet til en anden placering.
+<br>Der kan også bruges <code>window.location.replace("/contact");</code> til omdirigering, men det vil man kun
+bruge i specfikke situationer, hvor det er nødvendigt, fordi <code>window.location.replace()</code>, den erstatter
+brugerens klient nuværende browserhistorik, altså den side han er på nu, men den nye side som brugeren bliver
+omdirigeret hen til, hvilket gør at han ikke kan gå tilbage til den forrige side, ved at bruge browser historik,
+eller tilbage pilen i browseren.
+<br>Jeg nævnte tidligere at Server-side Redirections, det er hurtigere end Client-side Redirections, på grund
+at processen sker tidligere med at klienten skal først indlæse siden hvis det er Client-side Redirections,
+men i nogle tilfælde så er det godt at bruge Client-side Redirections, hvis man ikke har en kraftfuld server.
+Og hvis der er mange omdirigeringer, fordi i Server-side Redirections, så skal være request håndteres af serveren.
+Det kan også belaste serveren, som så kan påvirke applikationens ydeevne, så nogle gange skal man bruge
+Server-side Redirections og andre gange Client-side Redirections, det kommer an på applikationens krav og formål.
+<br><br>Det er vigtig at tænke på placering af kode kan påvirke applikationens hukommelse og effektivitet,
+derfor skal vi have godt optimeret gode både til frontend altså klienten og backend serveren, så der ikke bliver brugt
+unødvendige ressourcer, som kan medføre langsommere ydeevne. Hvis det er ikke optimeret kode i backend på serveren og
+ineffektivt, så vil det også medføre højere hukommelsesforbrug, det vil medføre længere responsetime eller servernedbrud
+under belastning. Derfor skal kode både i frontend og backend og generelt, være godt optimeret og strukturet godt. Så
+applikationer ikke bruger for meget hukommelse og er langsomme eller nedbryder efter noget belastning.
+<div class="loader-container">
+  <div class="loader"></div>
+</div>
 </p>
