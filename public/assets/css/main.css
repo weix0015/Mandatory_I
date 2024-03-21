@@ -16,19 +16,26 @@ main {
   color: #000000;
 }
 
+#learning_goals_image {
+  max-width: 19%;
+  margin-top: -0.5%;
+  margin-right: 40%;
+  height: auto;
+}
+
 #clock_date {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-#clock, #date {
+#clock,
+#date {
   margin-bottom: -3rem;
   margin-top: -4rem;
   font-size: 2em;
   color: #ffffff;
 }
-
 
 #top_header {
   text-align: center;

@@ -1,7 +1,9 @@
 import { Router } from "express"
-import { gitTerminalPage, javascriptDatatypesPage,
+import {
+  gitTerminalPage, javascriptDatatypesPage,
   nodeJSPage, typeCoercionPage,
-  restApiDesignPage} from "../util/readPages.js";
+  restApiDesignPage
+} from "../util/readPages.js";
 
 const router = Router();
 

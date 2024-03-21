@@ -19,7 +19,7 @@ function allFridayDates(startDate, endDate) {
       fridayDates.push(new Date(currentDate));
     }
     // increment + 7 for next friday
-    currentDate.setDate(currentDate.getDate() + 7);        
+    currentDate.setDate(currentDate.getDate() + 7);
   }
   return fridayDates;
 }

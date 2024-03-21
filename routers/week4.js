@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { crudableRestApiPage, javascriptDatePage,
-fetchMethodPage } from "../util/readPages.js";
+import {
+  crudableRestApiPage, javascriptDatePage,
+  fetchMethodPage
+} from "../util/readPages.js";
 
 const router = Router();
 

@@ -1,16 +1,16 @@
 <h1 id="top_header">JavaScript Function</h1>
-      <p>I javascript er der hoisting, som betyder at funktioner og variabler 
-        kan tilgås, før de er deklaret. Altså de bliver løftet op til toppen af
-        deres scope før alle code execution.
-        <br><br>Hoisting
-        <pre><code>let word;
+<p>I javascript er der hoisting, som betyder at funktioner og variabler 
+kan tilgås, før de er deklaret. Altså de bliver løftet op til toppen af
+deres scope før alle code execution.
+<br><br><strong>Hoisting</strong>
+<pre><code>let word;
 console.log(word); // Output undefined
 word = "Hello";
 console.log(word); // Output "Hello"</code></pre>
 Her er et eksempel, hvor word bliver først decleared efter output undefined, 
 og så output den igen, hvor resultatet vil være "Hello".
 <br><br>I javascript er der forskellige funktioner.
-<br><br>Anonymous Function
+<br><br><Strong>Anonymous Function</Strong>
 <pre><code>const getRandomIntAnonymousFunction = function (min, max) {
   return Math.floor(Math.random() * (max + 1 - min) + min);
 };</code></pre>
@@ -22,7 +22,7 @@ Anonymous funktioner er funktioner uden et navn. De oprettes direkte som en vær
 og tildeles ofte til enten variabler eller bruges som argumenter til andre funktioner. 
 funktioner kan udføre en handling, men da de ikke har noget navn, så kan de ikke kaldes
 udenfor det scope, som de er defineret, medmindre de er tildelt til en variabel.
-<br><br>Arrow Function
+<br><br><Strong>Arrow Function</Strong>
 <pre><code>const getRandomIntArrowFunction = (min, max) => {
   return Math.floor(Math.random() * (max + 1 - min) + min);
 };</code></pre>
@@ -43,7 +43,7 @@ Her er et eksempel på arrow function med <code>{ }</code> og <code>return</code
 hvor det ikke er en one liner. Det tager imod 2 parametre <code>width</code> og <code>height</code>.
 Funktionen beregner arealet ud af en rektangel ved multiplikation af bredden med højden og returnerer
 resultatet.
-<br><br>Callback eller callback-function
+<br><br><Strong>Callback eller callback-function</Strong>
 <pre><code>function performAction(callback) {
   callback();
 }
@@ -68,4 +68,4 @@ function greet() {
 }
 
 performAction(greet); // 1. Calls performAction with greet as input</code></pre>
-      </p>
+</p>

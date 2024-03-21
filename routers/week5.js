@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { importExportHtmlPage, importExportNodeJSPage, 
-  staticFilesPage, structureFrontendPage } from "../util/readPages.js";
+import {
+  importExportHtmlPage, importExportNodeJSPage,
+  staticFilesPage, structureFrontendPage
+} from "../util/readPages.js";
 
 const router = Router();
 

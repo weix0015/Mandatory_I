@@ -1,20 +1,27 @@
 <h1 id="top_header">Body Parsing</h1>
-<p>Body parsing, det er vigtigt, fordi når en klient sender data til serveren, som modtages i <code>JSON-format</code>,
-så skal vi konvertere så vi kan arbejde med dataen.
-Det er hver gang der sendes request til vores server som en del af en request i Express, så er det nødvendigt at
-parse dataene fra requesten for at kunne bruge dataen.
-Det er en måde at parse data fra <code>JSON-format</code> og det der sker er at vi parse data fra 
-<code>JSON-format</code> og konvertere det om til <code>JavaScript</code> objekter.
-I Express er der indbygget middleware kaldet for <code>express.json()</code>, som parse data fra JSON-format, og
-konvertere det om til <code>JavaScript</code> objekter. Ved at bruge <code>app.use(express.json())</code>
-i vores Express-applikation konfigurerer vi Express til automatisk at parse <code>request body</code> 
-fra <code>JSON</code> og konvertere det om til et <code>JavaScript-objekter</code>.
-Det betyder, altså, når en klient sender <code>JSON-data</code> til vores server, så vil vi kunne få adgang
-til dataene som <code>JavaScript-objekter</code> i <code>req.body</code>, inde i vores route funktioner.
-<br><br>
-Det parse <code>request body</code>, fordi så kan vi manipulerer og arbejde med de indgående data på en strukturet måde.
-Uden <code>body parsing</code>, så skal vi manuelt udføre parsing, som er besværligt og man opstå fejl under processen.
-<br>Ved at bruge Express indbygget <code>body parsing</code> middleware, så kan vi effektivt håndterer indgående data
-fra klienter og bygge mere robuste og strukturerede server applikationer.
-<img id="json_image" src="/assets/images/json.png" alt="json">
+<p>
+  Body parsing, det er vigtigt, fordi når en klient sender data til serveren,
+  som modtages i <code>JSON-format</code>, så skal vi konvertere så vi kan
+  arbejde med dataen. Det er hver gang der sendes request til vores server som
+  en del af en request i Express, så er det nødvendigt at parse dataene fra
+  requesten for at kunne bruge dataen. Det er en måde at parse data fra
+  <code>JSON-format</code> og det der sker er at vi parse data fra
+  <code>JSON-format</code> og konvertere det om til
+  <code>JavaScript</code> objekter. I Express er der indbygget middleware kaldet
+  for <code>express.json()</code>, som parse data fra JSON-format, og konvertere
+  det om til <code>JavaScript</code> objekter. Ved at bruge
+  <code>app.use(express.json())</code> i vores Express-applikation konfigurerer
+  vi Express til automatisk at parse <code>request body</code> fra
+  <code>JSON</code> og konvertere det om til et
+  <code>JavaScript-objekter</code>. Det betyder, altså, når en klient sender
+  <code>JSON-data</code> til vores server, så vil vi kunne få adgang til dataene
+  som <code>JavaScript-objekter</code> i <code>req.body</code>, inde i vores
+  route funktioner. <br /><br />
+  Det parse <code>request body</code>, fordi så kan vi manipulerer og arbejde
+  med de indgående data på en strukturet måde. Uden <code>body parsing</code>,
+  så skal vi manuelt udføre parsing, som er besværligt og man opstå fejl under
+  processen. <br />Ved at bruge Express indbygget
+  <code>body parsing</code> middleware, så kan vi effektivt håndterer indgående
+  data fra klienter og bygge mere robuste og strukturerede server applikationer.
+  <img id="json_image" src="/assets/images/json.png" alt="json" />
 </p>

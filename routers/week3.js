@@ -1,7 +1,9 @@
 import { Router } from "express";
-import {nodemonPage, loopMethodsPage,
+import {
+  nodemonPage, loopMethodsPage,
   urlPage, postRequestPage,
-bodyParsingPage } from "../util/readPages.js";
+  bodyParsingPage
+} from "../util/readPages.js";
 
 const router = Router();
 

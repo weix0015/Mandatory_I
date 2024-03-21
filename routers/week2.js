@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { javascriptScopingPage, javascriptFunctionPage,
-  packageJsonPage, expressPage, nodeModulesPage, } from "../util/readPages.js";
+import {
+  javascriptScopingPage, javascriptFunctionPage,
+  packageJsonPage, expressPage, nodeModulesPage,
+} from "../util/readPages.js";
 
 const router = Router();
 

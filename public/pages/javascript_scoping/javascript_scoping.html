@@ -20,7 +20,7 @@ imodsætning til var som giver os 10 som output 10 gange.
 eller redecleared men dens værdi kan godt blive ændret så længe 
 der ikke ændres på dens assignment.
 Der er forskellige scope i javascript.<br><br>
-global scope
+<strong>global scope</strong>
 <pre><code>let global = "global scope";
 function testFunction() {
   console.log(global); // Output "global scope"
@@ -31,7 +31,7 @@ console.log(global); // Output "global scope"</code></pre> det er et global scop
 hvor variablen kan bruges over alt i koden, som man kan se i eksempelt, 
 den kan bruges inde i funktionen men også uden for funktionen.
 <br><br>
-function scope
+<strong>function scope</strong>
 <pre><code>function someFunction() {
   let name = "world";
   console.log(name); // Output "world"
@@ -44,7 +44,7 @@ Function scope er hvor alt inde i funktion kan bruges inde i funktion og
 hvis man prøver at bruge det uden for funktionen så får man ReferenceError, 
 fordi variablen er ikke defined uden for funktionen.
 <br><br>
-block scope
+<strong>block scope</strong>
 <pre><code>function anotherFunction() {
   if (true) {
     let test = "test now";
@@ -59,7 +59,7 @@ og kan kun bruges inden for block scope, altså inden for if statementets blok.
 I javascript så er hedder det let lexical scope, altså når vi bruger let til 
 erklære variabler, er deres scope bestemt af den nærmeste blok, 
 som er der hvor de er deklareret, uanset om det er en funktion, et loop eller if-else statement.
-<br><br>let lexical scope
+<br><br><strong>let lexical scope</strong>
 <pre><code>function outerFunction() {
   let outer = "outer";
 
@@ -79,4 +79,4 @@ også inden i innterFunktionen, da dens scope afhænger af hvor den er deklaret,
 og i det her tilfælge er det inde i outerFunction, så både outer og inner kan bruges i innerFunction,
 men inner variablen kan ikke bruges i outerFunction kun i dens scope som er i innerFunction. 
 Det er også derfor man vil få en ReferenceError hvis man vil <code>console.log(inner);</code> uden for scope.
-      </p>
+</p>

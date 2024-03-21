@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { linterPage, promisesPage, 
-  routersPage } from "../util/readPages.js";
+import {
+  linterPage, promisesPage,
+  routersPage
+} from "../util/readPages.js";
 
 const router = Router();
 
