@@ -137,3 +137,8 @@ export const redirectionsPage = renderPage(redirections, {
   tabTitle: "Redirections",
   CSSLink: '<link rel="stylesheet" href="/pages/redirections/redirections.css">'
 });
+
+const ssrVsCsr = readPage("./public/pages/ssr_vs_csr/ssr_vs_csr.html");
+export const ssrVsCsrPage = renderPage(ssrVsCsr, {
+  tabTitle: "SSR VS CSR"
+});

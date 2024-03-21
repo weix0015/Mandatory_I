@@ -1,0 +1,174 @@
+<h1 id="top_header">SSR VS CSR</h1>
+<p>Server Side Rendering vs Client Side Rendering.<br>
+I Server Side Rendering, så vil alle HTML-indholdet blive generet på serveren og derefter 
+blive sendt til klienten. Det betyder altså klienten allerede modtager indholdet, når den side indlæses,
+det vil resultere i hurtigere indlæsningstid og også bedre SEO (Search Engine Optimization), fordi
+hvis man bruger SSR, så generes HTML-indholdet på serveren og sendes direkte til browseren, det betyder altså
+at søgemaskiner som Google kan indlæse indholdet direkte fra HTML-kilden. Derimod hvis det var der blev
+brugt Client Side Rendering (CSR), så vil der blive sendt en tom HTML-skabelon til browseren, hvor indholdet
+fyldes derefter ind dynamisk med <code>JavaScript</code>. Det vil både gøre det vanskeligere for søgemaskiner
+at indlæse indholdet, fordi de muligvis ikke venter på <code>JavaScript</code> dynamisk fylder det op eller
+så bliver indeholdet ikke indlæst korrekt.
+<br><br>Client Side Rendering, der sendes en tom HTML-skabelon til klienten, og derefter så hentes og fyldes
+indholet dynamisk ind med <code>JavaScript</code> på klientens side. Det kan resultere i langsommere og længere
+indlæsningstid, især hvis brugeren, har langsommere forbindelser.
+<br>Load time, er hurtigere på SSR til indlæsningstider, fordi indholdet allerede er rendret på serveren, som
+derefter sendes direkte til klienten. Med CSR, så vil load time, være langsommere og tage længere indlæsningstid,
+især hvis det er en stor hjemmeside med mange <code>JavaScript</code> filer, som der skal downloades og køres på
+klientens side.
+<br>Ressources spent, med SSR det kan kræve mere serverkraft, fordi det er serveren der arbejder og skal også
+rendere indholdet for hver request. CSR kan derimod bruge flere kræfter og mere arbejde på klientens enhed,
+især hvis, det er en stor hjemmeside med komplekse beregninger eller store mængder af data, som skal blive behandlet
+og håndteres.
+<br><br>SEO, er bedre med SSR, fordi søgemaskiner kan indlæse det direkte det renderede indhold fra serveren.
+Hvor derimod med CSR, så kræves der mere komplekse SEO-strategier, fordi indholdet først generes på klienten.
+<br>Dealing with CORS, med SSR har ingen CORS-problemer, fordi at alt kommunikation sker mellem serveren og klienten
+på samme domæne, fordi alle siderne bliver renderet fra serveren. Derimod med CSR kan der dog godt være CORS-problemer,
+især i situationer hvor at der er requests til forskellige domæner. Det kan være de skal bruge data fra en anden server,
+og siden skal først hente det data, hvilket kan give CORS-problemer, som skal håndteres, men med SSR, så er alt,
+altså på samme server, så alt bliver håndteret fra vores egen server og til klienten.
+<h2>Reading files</h2>
+<pre><code>import fs from "fs";
+
+export function readPage(path) {
+  return fs.readFileSync(path).toString();
+}
+  
+export function renderPage(page, config = {}) {
+  const header = fs.readFileSync("./public/components/header/header.html").toString();
+  const footer = fs.readFileSync("./public/components/footer/footer.html").toString();
+  return header.replace("$TAB_TITLES$", config.tabTitle || "Home")
+    .replace("$CSS_LINKS$", config.CSSLink || "")
+    + page
+    + footer.replace("$JAVASCRIPT_SCRIPTS$", config.JavascriptScript || "");
+}</code></pre>
+Det er <code>templatingEngine.js</code>, som har 2 funktioner <code>readPage</code> og <code>renderPage</code>.
+<code>readPage()</code> den indlæser indeholdet af en HTML-fil, hvor <code>renderPage()</code>, den kombinerer
+indholdet af en <code>HTML-side</code> med <code>header</code> og <code>footer</code> komponenter for at danne
+alt <code>HTML-output</code>, de 2 <code>HTML</code> filer ligger i mappen <code>/public/components/header/</code>
+og <code>/public/components/footer/</code>, ligesom du har se i koden, som er gemt i hver sin variable.
+Det er for at have globale <code>HTML</code> sider, hvor toppen af siden og bunden, bliver kun skrevet i koden
+1 gang, så der ikke er duplikeret kode.<br><br>
+Vi bruger <code>fs</code>, og det står for <code>File System</code>, som er noget der er indbygget 
+modul i <code>Node.js</code>, og det giver os adgang til at arbejde med filsystemet og filer på computeren,
+det kan også være filer på server. I vores eksemplet, bruger vi det til at indlæse filer ved at bruge 
+<code>readFileSync()</code>, hvor vi specificerer, vores 2 <code>HTML</code> filer <code>header.html</code> og 
+<code>footer.html</code>.<br>Men <code>fs modulet</code>, det er et kraftfuldt værktøj, som bruges til at
+håndterer operationer med filer i <code>Node.js</code> applikationer, det er alt fra at læse filer til 
+at skrive til filer.
+<pre><code>import { renderPage, readPage } from "./templatingEngine.js";
+
+const home = readPage("./public/pages/homepage/homepage.html");
+export const homepagePage = renderPage(home, {
+  tabTitle: "Home",
+  CSSLink: '&lt;link rel=&quot;stylesheet&quot; href=&quot;/pages/homepage/homepage.css&quot;&gt;',
+  JavascriptScript: '&lt;script src=&quot;/pages/homepage/homepage.js&quot;&gt;&lt;/script&gt;'
+});</code></pre>
+
+Det er <code>readPages.js</code>, som importerer funktionerne fra <code>templatingEngine.js</code> og bruger
+dem til at generere den fulde <code>HTML-output</code> for hver side.
+<br><code>readPages.js</code>, den bruger <code>readPage()</code> fra <code>templatingEngine.js</code> til at
+læse indholdet af <code>HTML-siden</code> og derefter i <code>renderPage()</code> funktionen, så generes den fulde
+<code>HTML-output</code> med konfiguerede egenskaber for <code>tabTitle</code>, <code>CSSLink</code> og 
+<code>JavaScript-script</code>, det er at nogen side har specifikke filer de skal bruge, som andre sider ikke skal bruge.
+I eksemplet, så er <code>tabTitle: "Home"</code>, det betyder at <code>&lt;title&gt;Home&lt;/title&gt;</code>, så med
+andre ord, titlen på den tab i browseren hedder Home.
+Og <code>CSSLink</code>, det er til de forskellige sider, som har specifikke <code>css links</code>, så vi specificerer
+hvilken side, der skal linkes med hvilke <code>css</code> og <code>javascript</code> filer, og det samme med 
+<code>tabeTile</code>, fordi hver side skal have forskellige tabTile navne.<br>
+Her er eksemplet med <code>header.html</code> inde i <code>/components/header</code> mappen.
+<pre><code>&lt;!DOCTYPE html&gt;
+  &lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/css/main.css&quot;&gt;
+    $CSS_LINKS$
+    
+    &lt;title&gt;$TAB_TITLES$&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Code Home&lt;/h1&gt;
+    &lt;/nav&gt;
+    &lt;main&gt;
+</code></pre>
+Som du kan se i eksemplet i <code>header.html</code>, så bliver <code>$CSS_LINKS</code> og <code>tabTile</code>
+det bliver erstattet med, hvad end vi har angivet det til at være i vores <code>readPage.js</code> fil.
+<br>På den måde kan behøver vi ikke at have masser af duplikeret kode, og vi kan bruge det globalt, og kun
+ændre i <code>readPage.js</code>, de forskellige <code>css, javascript</code>, og <code>tabTile</code> til at
+være i de specifikke sider, hvor der er behov for at bruge andre <code>css, javascript</code> filer og 
+<code>tabTile</code> værdier, så er det både skalarbar den her struktur og mindsker mængden af kode, og hvor meget
+applikationen fylder, da vi har mindre kode.
+<br>Det er eksemplet fra <code>footer.html</code>, som er i mappen <code>/components/footer</code>.
+<pre><code>&lt;/main&gt;
+
+  &lt;footer&gt;&lt;/footer&gt;
+  &lt;script src=&quot;/assets/js/main.js&quot;&gt;&lt;/script&gt;
+  $JAVASCRIPT_SCRIPTS$
+  &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre>
+Hvor i <code>footer.html</code>, det er samme struktur som i <code>header.html</code>, det bunden af 
+<code>HTML-siden</code>, som globalt bliver brugt til alle sider, hvor jeg har ligesom før 
+<code>$JAVASCRIPT_SCRIPTS</code>, som bliver erstattet med det der er blevet angivet i <code>readPage.js</code>,
+som bliver specificeret, fra side til side, så alle sider har, de samme globale elementer, og konfigurer kun
+specifikke <code>css, javascript</code> filer, hvor de ikke skal være globale, men specifik for den side.
+<br>Til sidst så bliver det brugt i <code>app.js</code>.
+<pre><code>import express from "express";
+import { homepagePage } from "../util/readPages.js";
+
+const app = express();
+  
+app.get("/", (req, res) => {
+  res.send(homepagePage);
+});
+  
+const PORT = 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});</code></pre>
+Som du kan se i eksemplet her, så først importere <code>Express-modulet</code>, så det kan bruges til at initialisere,
+som vi gør i 3 linje. Vi importere også <code>readPages.js</code> fra <code>../util/readPages.js</code>,
+for at kunne bruge det til vores <code>HTML-sider</code>, hvor <code>readPages.js</code> genere <code>HTML-sider</code>
+så alle vores sider er globale og kun ændret, ved indholdet af <code>CSS_LINKS, JAVASCRIPT_SCRIPTS</code> og 
+<code>tabTitle</code>, da de forskellige sider har forskellige indhold, men har samme <code>header</code> og
+<code>footer</code>, som vi vil servere. Derefter vil vi lave en instans af Express, det betyder altså vi
+initialisere <code>express</code> og gemmer den i variablen <code>app</code>.
+Vi opsætter en route, hvor det er en <code>GET HTTP metode</code>, men en <code>callback-funktion</code>, som skal
+håndterer request og respons, og i det her tilfælde, så hvis den bruger request til vores endpoint 
+<code>/</code>, så vil vores server respons tilbage, hvor der bliver sendt vores generede <code>HTML-side</code> i 
+<code>readPages.js</code> med <code>header.html</code> og <code>footer.html</code>.
+Til sidst, så har vi gemt server port i variablen <code>PORT</code> med værdien 8080, med andre ord, vores server
+er på porten <code>8080</code>, og det gør vi ved at bruge <code>app.listen()</code>, hvor den vil lytte på port
+<code>8080</code>, når serveren er startet, så udføres den callback i metoden, som vil output besked til konsol,
+for at fortælle os server porten kører på porten 8080.
+<h2>Template Engine</h2>
+Vores struktur er en template engine, kombineret med mappe struktur for at have en god standard struktur. 
+Men normalt så er en template engine et værktøj, der bruges til at generere dynamisk indhold,
+på HTML-sider, og det gøres ved at kombinerer statiske skabelonstruktur, altså vores <code>header.html</code>
+og <code>footer.html</code>, i vores tilfælde, men det er statiske <code>HTML</code> filer, som er delt i 
+flere filer, så man har dele af den endelig <code>HTML-side</code> i flere html filer. 
+Derudover kan man også lave sin egen template engine, som vi har gjort i eksemplet.
+Men der findes også andre template engines, som andre udvikler har lavet som man kan bruge, som alternativ, 
+hvis man ikke vil lave sin egen template engine.
+<h2>Nodemon ext</h2>
+I <code>nodemon.json</code> filen, så kan man konfigurer ext, for at specificerer hvilke filtyper og navne på filer, 
+som <code>nodemon</code> skal overvåge, for hver gang der kommer ændringer i de filer. Det betyder med andre ord,
+hvis du ændre i en af de filer, som nodemon overvåger, så vil nodemon genstarte automatisk ens <code>Node.js</code>
+applikationen, når du kører <code>nodemon</code> til at køre din server.
+<br>Det er godt til udviklen, hvis man skal ændre i <code>javascript, css og html</code> filer, til frontend,
+eller bare generelt til alle de fil typer, så vil nodemon genstarte, det er godt til test, hvis du ændre
+noget kode, så kan du se at de virker, så du ikke manuelt skal genstarte serveren hver gang for at teste,
+om det du har lavet er rigtig, som forventet.
+<br>Her er et eksempel på det.
+<pre><code>{
+  "ext": "html, js, json, css"
+}</code></pre>
+I det her eksempel, der bruger jeg <code>ext</code> som jeg konfigurer, som gør at nodemon vil overvåge,
+alle mine filtype som er <code>html</code>, <code>js</code>, <code>json</code> og <code>css</code>.
+Så hver gang jeg laver en ændring i de filer, så vil nodemon automatisk genstarte. Det ligger i filen 
+<code>nodemon.json</code>, og husk på <code>nodemon</code>, det er godt til test og under udviklen, 
+men ikke til live produktion, da man gerne vil have ens kunder kan bruge ens web applikation, så man tester det,
+enten i en anden version, ved siden af, så kunder man bruge ens hjemmeside, 
+mens man videreudvikler det, så det er separate.
+</p>
