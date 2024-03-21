@@ -1,3 +1,100 @@
 <h1 id="top_header">Promises</h1>
-<p>
+<p>Asynkron kode i <code>JavaScript</code>, det er kode, som kan bliver udført uden at det blokere
+den efterfølgende kørsel af kode, med andre ord, det kan køre uden noget andet kode skal venter på det køre
+før det næste kan køre i koden. Det er i stedet for at køre det fra start til slut, altså linje efter linje,
+så kan asynkron kode køre når det skal køres uden det blokere den næste del af koden under.
+<br><br>Det bruges til operationer, som tager tid, det kan være netværks request, eller operationer med filer
+i systemet eller arbejde relateret til database, der køre det asynkron, uden at stoppe andre dele af koden fra
+at køre.
+<br><br><Strong>Promises</Strong><br>
+Det er et mønster i asynkron programmering. Det er en mere struktureret måde og mere læsbar måde at håndtere
+ikke blokerende kode altså asynkron kode, hvor det ikke bare er <code>callback-funktioner</code>.
+En promise det repræsenterer resultatet af en asynkron operation, hvor den operation der sker, det kan enten blive
+<code>resolve</code>, med andre ord opfyldt / fuldført, hvor man får et resultat eller det kan også blive afvist med
+en fejl, det betyder altså det kan blive <code>reject</code>, hvor man så får en fejl besked som resultat.
+<br>I Promises, så er der <code>then()</code> metoder, som bruges til at håndtere resultatet af en operation, altså
+hvad der skal ske efter. I promises, der er der også en <code>catch()</code> metode, og den bruges til at håndtere
+eventuelle fejl, som kan opstå undervejs.
+<br>Her er et eksempel.
+<pre><code>function fetchData() {
+  return new Promise((resolve, reject) => {
+    fetch("https://api.example.com/data")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("response was not ok");
+        }
+        return response.json();
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+}
+
+fetchData()
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error(error);
+  });</code></pre>
+I det her eksempel, der har vi en funktion <code>fetchData()</code>, det bliver brugt til at hente data fra
+et ekstern <code>API</code>.
+Så opretter vi et <code>Promise</code> inde i funktionen <code>fetchData()</code>, ved at bruge
+<code>new Promise((resolve, reject))</code>, det er så en asynkron operation, som i det her tilfælde er en 
+<code>HTTP request</code>, i vores tilfælde en <code>GET-Request</code>, og det gøres ved at vi bruger
+<code>fetch()</code> til den bestemte <code>URL</code>. Operationen er forsinket med 2 sekunder, med andre ord,
+det betyder vi har sat en timer, som forsinker det med 2 sekunder. Bagefter, når <code>fetch()</code> operationen,
+når den er færdig, så bliver <code>resolve("Data fetched successfully!")</code> kaldt, for at sende dataene tilbage
+som et result af <code>Promise</code>. Det vil svarer til at sige <code>Operationen lykkedes, her er resultatet</code>.
+Uden for <code>fetchData()</code> funktionen, der bruges der <code>.then()</code> for at registrere, hvad der skal ske
+hvis det successfuldt, så skal det håndteres, hvor det bliver udført, når <code>Promise</code> er blevet 
+<code>resolve()</code>, med andre ord, når det ikke fejler og bliver opfyldt og vi kan få dataene. I eksemplet
+der logger vi dataene ud til konsollen.
+<br>Derudover, har vi også en fejlhåndtering, hvis det nu fejler, og der opstår en fejl under <code>fetch()</code>,
+så vil <code>reject()</code> blive kaldt, og det vil så sende fejlen til vores <code>.catch()</code> blok, der er 
+uden for <code>fetchData()</code> funktionen. I eksemplet her, så logger vi også fejl beskeden ud til konsollen.
+<br><br><Strong>Async / Await</Strong><br>
+Async / await bruges til promises, og det gør det lettere at både skrive asynkron kode og håndtere promises.
+Når man bruger <code>async</code> keyword, så fortæller du at funktionen er <code>asynkron</code>, også når 
+der bruges <code>await</code> keyword, inde i funktionen, så betyder det at man venter på, at en <code>promise</code>
+er afsluttet og så får du resultatet. Det er både med til at gøre koden mere læsbar og og nemmere at forstå.
+<br>Her er et eksempel.
+<pre><code>async function fetchData() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const data = { name: "John", age: "24" };
+      resolve(data);
+    }, 2000);
+  });
+}
+
+async function getData() {
+  try {
+    const data = await fetchData();
+    console.log("Data fetched succesfully: ", data);
+  } catch (error) {
+    console.error("Error fetching data: ", error);
+  }
+}
+
+getData();</code></pre>
+I det her eksempel, der bruger vi <code>fetchData()</code> funktionen, det bruger vi fordi vi gerne vil simulere
+en netværk request, hvor vi forsinker det med 2 sekunder, for at simulere det skal tage 2 sekunder at fuldføre.
+Men i eksemplet, når <code>getData()</code> funktionen bliver kaldt venter den på at funktionen <code>fetchData()</code>
+bliver fuldført, og det sker ved hjælp af at bruge <code>await</code> keyword, og når dataene er hentet, så vælger vi at
+udskrive dataene ud i konsollen. Men hvis der nu opstår en fejl under <code>fetch</code>, altså, når vi prøver at
+hente dataene, så bliver fejlen fanget af vores <code>catch()</code> blok, som så vil udskrive fejl beskeden og fejlen 
+ud i konsollen.
+<br><br>
+Serveren udfører ofte mange operationer samtidig fx. håndtering af mange klient request, filindlæsning, 
+database operationer. Hvis alle de operationer blev udført synkront, altså en efter en, så ville serveren blive blokeret
+og serverens ydeevne ville falde en del, især under meget belastning. Derfor ved at bruge asynkron kode i 
+<code>Node.js</code>, så kan serveren fortsætte med at håndtere og behandle andre opgaver, imens den venter på respons
+fra netværk requests eller database. Det hjælper serveren med at opretholde serverens <code>responsivitet</code>, altså
+evnen til at reagere hurtigt og håndtere request, og det hjælper også med at holde servern skalarbar.
 </p>
+<img id="server_image" src="/assets/images/server.png" alt="server">

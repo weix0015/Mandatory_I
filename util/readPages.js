@@ -153,7 +153,8 @@ export const linterPage = renderPage(linter, {
 
 const promises = readPage("./public/pages/promises/promises.html");
 export const promisesPage = renderPage(promises, {
-  tabTitle: "Promises"
+  tabTitle: "Promises",
+  CSSLink: '<link rel="stylesheet" href="/pages/promises/promises.css">'
 });
 
 const routers = readPage("./public/pages/routers/routers.html");
